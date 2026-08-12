@@ -3,7 +3,7 @@ services:
     name: samwatex
     runtime: node
     plan: free
-    buildCommand: npm install && npm run build
+    buildCommand: npm install --include=dev --no-audit --no-fund && npm run build
     startCommand: npm start
     healthCheckPath: /api/health
     autoDeployTrigger: checksPass
@@ -17,12 +17,4 @@ services:
       - key: ADMIN_PASSWORD
         sync: false
       - key: DATABASE_URL
-        fromDatabase:
-          name: samwatex-website-db
-          property: connectionString
-
-databases:
-  - name: samwatex-website-db
-    plan: free
-    databaseName: samwatex_website
-    user: samwatex_website
+        sync: false
