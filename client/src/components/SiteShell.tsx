@@ -7,11 +7,12 @@ import { SeoManager } from "@client/components/SeoManager";
 
 const navItems = [
   ["/about", "About"],
-  ["/companies", "Companies"],
-  ["/industries", "Industries"],
-  ["/global-reach", "Global reach"],
+  ["/what-we-do", "What we do"],
+  ["/products", "Products"],
+  ["/process", "Process"],
+  ["/companies/hmd-international-group", "HMD"],
+  ["/export-markets", "Export markets"],
   ["/gallery", "Gallery"],
-  ["/contact", "Contact"],
 ] as const;
 
 export function SiteShell() {
@@ -42,7 +43,7 @@ export function SiteShell() {
   }, []);
 
   return (
-    <div className="site-shell">
+    <div className="site-shell textile-site-shell">
       <SeoManager content={content} />
       <header className={`site-header ${scrolled ? "scrolled" : ""}`}>
         <Link to="/" className="brand" aria-label={`${content.brandName} home`}>
@@ -50,11 +51,11 @@ export function SiteShell() {
           <span className="brand-copy">{content.brandDescriptor}</span>
         </Link>
 
-        <nav className={`main-nav ${menuOpen ? "open" : ""}`} aria-label="Primary navigation">
+        <nav className={`main-nav textile-nav ${menuOpen ? "open" : ""}`} aria-label="Primary navigation">
           {navItems.map(([to, label]) => (
             <NavLink key={to} to={to}>{label}</NavLink>
           ))}
-          <Link className="mobile-nav-contact" to="/contact">Business enquiry ↗</Link>
+          <Link className="mobile-nav-contact" to="/contact">Wholesale enquiry ↗</Link>
         </nav>
 
         <div className="header-actions">
@@ -73,18 +74,19 @@ export function SiteShell() {
 
       <main><Outlet /></main>
 
-      <footer className="site-footer">
+      <footer className="site-footer textile-footer">
         <div className="footer-brand-block">
           <div className="footer-mark">{content.brandName}</div>
-          <p>Trade and export from Lebanon.</p>
+          <p>Used clothing · sorting · grading · wholesale export</p>
         </div>
         <div className="footer-links">
           <Link to="/about">About</Link>
-          <Link to="/companies">Companies</Link>
-          <Link to="/industries">Industries</Link>
-          <Link to="/global-reach">Global reach</Link>
-          <Link to="/gallery">Gallery</Link>
           <Link to="/what-we-do">What we do</Link>
+          <Link to="/products">Products</Link>
+          <Link to="/process">Process</Link>
+          <Link to="/companies/hmd-international-group">HMD</Link>
+          <Link to="/export-markets">Export markets</Link>
+          <Link to="/gallery">Gallery</Link>
           <Link to="/contact">Contact</Link>
           <a href={`mailto:${content.contactEmail}`}>{content.contactEmail}</a>
         </div>
