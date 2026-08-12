@@ -35,22 +35,22 @@ export function CompanyProfilePage() {
           <h1>{company.name}</h1>
           <p>{company.tagline}</p>
         </div>
-        <div className="company-profile-badge">SAMWATEX / COMPANY 01</div>
+        <div className="company-profile-badge">SAMWATEX · HMD</div>
       </section>
 
       <section className="company-overview section-pad">
         <div className="section-label">Company overview</div>
         <div className="editorial-copy">
-          <h2>Commercial execution built around real market demand.</h2>
+          <h2>The market-facing trading company within SAMWATEX.</h2>
           <p>{company.overview}</p>
-          <p>HMD operates as part of the SAMWATEX group while maintaining a distinct commercial identity and market-facing role.</p>
+          <p>HMD operates under SAMWATEX while keeping a distinct commercial identity for customers, suppliers and distribution partners.</p>
         </div>
       </section>
 
       <section className="company-focus section-pad section-dark">
         <div className="section-heading-row">
-          <div><p className="eyebrow light">Core focus</p><h2>Where HMD creates value.</h2></div>
-          <p className="section-note light-note">The public profile is intentionally focused on commercial capabilities; exact product lines and photography can be expanded as the catalog develops.</p>
+          <div><p className="eyebrow light">Core focus</p><h2>What HMD handles.</h2></div>
+          <p className="section-note light-note">The focus is practical: source the right product, coordinate supply and support the customer through the commercial process.</p>
         </div>
         <div className="focus-list">
           {company.focusAreas.map((focus, index) => (
@@ -61,7 +61,7 @@ export function CompanyProfilePage() {
 
       <section className="company-industries section-pad">
         <div className="section-heading-row">
-          <div><p className="eyebrow">Commercial areas</p><h2>Connected to the SAMWATEX portfolio.</h2></div>
+          <div><p className="eyebrow">Commercial areas</p><h2>Products and activities connected to HMD.</h2></div>
           <Link className="text-link" to="/industries">Explore all industries <span>↗</span></Link>
         </div>
         <div className="industry-preview-grid">
@@ -78,7 +78,7 @@ export function CompanyProfilePage() {
       <section className="company-markets section-pad section-warm">
         <div className="section-label">Markets served</div>
         <div className="company-market-copy">
-          <h2>Market-facing, export-minded.</h2>
+          <h2>Based in Lebanon. Working into export markets.</h2>
           <div className="company-market-tags">
             {company.markets.map((market) => <span key={market}>{market}</span>)}
           </div>
@@ -87,12 +87,12 @@ export function CompanyProfilePage() {
 
       <section className="contact-band company-contact-band">
         <div>
-          <p className="eyebrow light">Business enquiries</p>
-          <h2>Talk to SAMWATEX about HMD International Group.</h2>
+          <p className="eyebrow light">HMD enquiries</p>
+          <h2>Send us the product, quantity and destination you are working with.</h2>
         </div>
         <div className="contact-band-actions">
           <a href={`mailto:${content.contactEmail}`}>{content.contactEmail}</a>
-          <Link className="button light" to="/contact?type=hmd">Start an HMD enquiry</Link>
+          <Link className="button light" to="/contact?type=hmd">Contact HMD through SAMWATEX</Link>
         </div>
       </section>
     </div>
