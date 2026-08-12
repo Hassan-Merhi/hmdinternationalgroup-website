@@ -1,0 +1,70 @@
+/* Phase 13 — SEO, social and performance */
+.hero-image,
+.home-gallery-visual > img,
+.gallery-visual > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-image { z-index: -1; }
+.home-gallery-visual,
+.gallery-visual { position: relative; overflow: hidden; }
+.home-gallery-visual > img,
+.gallery-visual > img { z-index: 0; }
+.home-gallery-visual > span,
+.gallery-visual-grid,
+.gallery-code,
+.gallery-category { position: relative; z-index: 2; }
+
+.route-loading {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  background: #09120f;
+  color: rgba(255,255,255,.72);
+  font-size: .72rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+.route-loading span::after {
+  content: "";
+  display: block;
+  width: 54px;
+  height: 1px;
+  margin: 16px auto 0;
+  background: #d5ad6d;
+  animation: route-load 1.2s ease-in-out infinite alternate;
+}
+@keyframes route-load { from { transform: scaleX(.25); opacity: .4; } to { transform: scaleX(1); opacity: 1; } }
+
+.not-found-hero { min-height: 100svh; display: flex; flex-direction: column; justify-content: center; }
+.not-found-hero .hero-actions { margin-top: 32px; }
+
+/* Let the browser skip layout/paint work for deep, off-screen homepage sections. */
+@supports (content-visibility: auto) {
+  .companies-preview,
+  .homepage-industries,
+  .markets-section,
+  .home-stats,
+  .home-gallery-preview,
+  .gallery-section,
+  .company-industries,
+  .company-markets {
+    content-visibility: auto;
+    contain-intrinsic-size: 900px;
+  }
+}
+
+@media (prefers-reduced-data: reduce) {
+  .site-grain { display: none; }
+  .hero-orbit { animation: none !important; opacity: .45; }
+  .home-gallery-card:hover .home-gallery-visual,
+  .gallery-card:hover .gallery-visual { transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .route-loading span::after { animation: none; }
+}
