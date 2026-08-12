@@ -156,7 +156,7 @@ async function verifyProductionServer() {
 
     const login = await fetch(`${baseUrl}/api/admin/login`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "X-Forwarded-Proto": "https" },
       body: JSON.stringify({ username: "phase15", password }),
     });
     assert.equal(login.status, 200, "valid admin credentials should authenticate");
