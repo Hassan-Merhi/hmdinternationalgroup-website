@@ -7,6 +7,7 @@ const AboutPage = lazy(() => import("@client/pages/AboutPage").then((module) => 
 const BusinessesPage = lazy(() => import("@client/pages/BusinessesPage").then((module) => ({ default: module.BusinessesPage })));
 const IndustriesPage = lazy(() => import("@client/pages/IndustriesPage").then((module) => ({ default: module.IndustriesPage })));
 const ProcessPage = lazy(() => import("@client/pages/ProcessPage").then((module) => ({ default: module.ProcessPage })));
+const SustainabilityPage = lazy(() => import("@client/pages/SustainabilityPage").then((module) => ({ default: module.SustainabilityPage })));
 const CompanyProfilePage = lazy(() => import("@client/pages/CompanyProfilePage").then((module) => ({ default: module.CompanyProfilePage })));
 const GlobalReachPage = lazy(() => import("@client/pages/GlobalReachPage").then((module) => ({ default: module.GlobalReachPage })));
 const GalleryPage = lazy(() => import("@client/pages/GalleryPage").then((module) => ({ default: module.GalleryPage })));
@@ -30,6 +31,7 @@ export default function App() {
             <Route path="/what-we-do" element={<BusinessesPage />} />
             <Route path="/products" element={<IndustriesPage />} />
             <Route path="/process" element={<ProcessPage />} />
+            <Route path="/sustainability" element={<SustainabilityPage />} />
             <Route path="/companies/:slug" element={<CompanyProfilePage />} />
             <Route path="/export-markets" element={<GlobalReachPage />} />
             <Route path="/gallery" element={<GalleryPage />} />
