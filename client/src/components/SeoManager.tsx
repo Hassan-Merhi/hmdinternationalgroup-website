@@ -33,10 +33,10 @@ function pageSeo(pathname: string, content: SiteContent) {
   const company = companySlug ? content.companies.find((item) => item.slug === companySlug) : undefined;
   if (company) {
     return {
-      title: `${company.name} — A ${content.brandName} Company`,
+      title: `${company.name} — Wholesale Used Clothing | ${content.brandName}`,
       description: company.description,
       known: true,
-      crumbs: ["Companies", company.name],
+      crumbs: ["HMD International Group"],
     };
   }
 
@@ -63,13 +63,18 @@ function pageSeo(pathname: string, content: SiteContent) {
       crumbs: ["Process"],
     },
     "/export-markets": {
-      title: `Used Clothing Export Markets — ${content.brandName}`,
-      description: "SAMWATEX is based in Lebanon and supplies wholesale used clothing and textile export relationships across Africa, the Middle East and selected markets.",
-      crumbs: ["Export Markets"],
+      title: `Used Clothing Export & Logistics — ${content.brandName}`,
+      description: "See how SAMWATEX prepares wholesale used clothing orders in Lebanon for baling, staging, container loading and export to Africa, the Middle East and selected markets.",
+      crumbs: ["Export & Logistics"],
+    },
+    "/sustainability": {
+      title: `Textile Reuse & Second-Life Clothing — ${content.brandName}`,
+      description: "SAMWATEX extends the useful commercial life of reusable clothing and textiles through sorting, grading, wholesale preparation and redistribution from Lebanon.",
+      crumbs: ["Textile Reuse"],
     },
     "/gallery": {
-      title: `Gallery — ${content.brandName}`,
-      description: "Explore SAMWATEX operations, sorted textile categories, baling, HMD International Group and export preparation from Lebanon.",
+      title: `Operations Gallery — ${content.brandName}`,
+      description: "Explore SAMWATEX sorting, grading, products, bales, loading, HMD International Group and export preparation from Lebanon.",
       crumbs: ["Gallery"],
     },
     "/contact": {
