@@ -20,6 +20,7 @@ const inquiryTypes = [
 export function ContactPage() {
   const [status, setStatus] = useState("");
   const [reference, setReference] = useState("");
+  const [formStartedAt, setFormStartedAt] = useState(() => Date.now());
   const [searchParams] = useSearchParams();
   const [content, setContent] = useState<SiteContent>(defaultSiteContent);
   const requestedType = searchParams.get("type");
@@ -30,11 +31,10 @@ export function ContactPage() {
   useEffect(() => {
     setInquiryType(defaultType);
     setCompanyInterest(defaultType === "hmd" ? "HMD International Group" : "SAMWATEX");
+    setFormStartedAt(Date.now());
   }, [defaultType]);
 
-  useEffect(() => {
-    void getSiteContent().then(setContent);
-  }, []);
+  useEffect(() => { void getSiteContent().then(setContent); }, []);
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -56,6 +56,7 @@ export function ContactPage() {
         return;
       }
       formElement.reset();
+      setFormStartedAt(Date.now());
       setInquiryType("general");
       setCompanyInterest("SAMWATEX");
       setReference(body.reference || "");
@@ -70,9 +71,7 @@ export function ContactPage() {
       <section className="page-hero compact contact-hero">
         <p className="eyebrow light">Contact SAMWATEX</p>
         <h1>Start the right commercial conversation.</h1>
-        <p className="page-hero-copy">
-          Product, export, supplier and partnership enquiries are handled from our base in Lebanon. Tell us what you need and where the opportunity is.
-        </p>
+        <p className="page-hero-copy">Product, export, supplier and partnership enquiries are handled from our base in Lebanon. Tell us what you need and where the opportunity is.</p>
       </section>
 
       <section className="contact-layout enquiry-layout section-pad">
@@ -83,18 +82,11 @@ export function ContactPage() {
           <div className="contact-detail-row"><span>Email</span><a href={`mailto:${content.contactEmail}`}>{content.contactEmail}</a></div>
           <div className="contact-detail-row"><span>Phone</span><a href={`tel:${content.contactPhone}`}>{phoneDisplay(content.contactPhone)}</a></div>
           <div className="contact-detail-row address-row"><span>Address</span><p>{content.contactAddress}</p></div>
-          <div className="enquiry-guide">
-            <span>Useful to include</span>
-            <p>Product or category · destination market · expected quantity · timing · company details</p>
-          </div>
+          <div className="enquiry-guide"><span>Useful to include</span><p>Product or category · destination market · expected quantity · timing · company details</p></div>
         </div>
 
         <form className="contact-form business-enquiry-form" onSubmit={submit}>
-          <div className="form-heading">
-            <p className="eyebrow">Business enquiry</p>
-            <h2>Tell us what you are looking for.</h2>
-          </div>
-
+          <div className="form-heading"><p className="eyebrow">Business enquiry</p><h2>Tell us what you are looking for.</h2></div>
           <label className="form-span-2">Enquiry type
             <select name="inquiryType" value={inquiryType} onChange={(event) => {
               const value = event.target.value;
@@ -104,7 +96,6 @@ export function ContactPage() {
               {inquiryTypes.map(([value, label]) => <option value={value} key={value}>{label}</option>)}
             </select>
           </label>
-
           <label>Name<input name="name" autoComplete="name" maxLength={120} required /></label>
           <label>Business email<input name="email" type="email" autoComplete="email" maxLength={180} required /></label>
           <label>Company<input name="company" autoComplete="organization" maxLength={180} /></label>
@@ -113,20 +104,15 @@ export function ContactPage() {
           <label>WhatsApp<input name="whatsapp" type="tel" maxLength={60} /></label>
           <label>Company of interest
             <select name="companyInterest" value={companyInterest} onChange={(event) => setCompanyInterest(event.target.value)}>
-              <option>SAMWATEX</option>
-              <option>HMD International Group</option>
-              <option>Not sure / Group enquiry</option>
+              <option>SAMWATEX</option><option>HMD International Group</option><option>Not sure / Group enquiry</option>
             </select>
           </label>
           <label>Product / category<input name="productInterest" maxLength={180} placeholder="e.g. textiles, apparel, general merchandise" /></label>
-          <label className="form-span-2">Message<textarea name="message" rows={7} maxLength={4000} required /></label>
+          <label className="form-span-2">Message<textarea name="message" rows={7} minLength={10} maxLength={4000} required /></label>
           <input type="hidden" name="sourcePath" value="/contact" />
+          <input type="hidden" name="startedAt" value={formStartedAt} />
           <label className="website-field" aria-hidden="true">Website<input name="website" tabIndex={-1} autoComplete="off" /></label>
-
-          <div className="form-submit-row form-span-2">
-            <button className="button dark" type="submit">Send business enquiry</button>
-            <p>We use these details only to respond to your enquiry.</p>
-          </div>
+          <div className="form-submit-row form-span-2"><button className="button dark" type="submit">Send business enquiry</button><p>We use these details only to respond to your enquiry.</p></div>
           {status && <p className="form-status form-span-2" role="status">{status}{reference ? ` Reference: ${reference}.` : ""}</p>}
         </form>
       </section>
