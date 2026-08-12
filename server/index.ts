@@ -48,11 +48,11 @@ app.use("/api/admin", sameOriginGuard);
 
 const standardJson = express.json({ limit: "256kb", strict: true });
 const mediaJson = express.json({ limit: "12mb", strict: true });
-app.use((req, res, next) => {
-  const largeMediaRequest = req.path === "/api/admin/media" && req.method === "POST"
-    || /^\/api\/admin\/media\/\d+\/content$/.test(req.path) && req.method === "PUT";
-  return largeMediaRequest ? mediaJson(req, res, next) : standardJson(req, res, next);
-});
+function isLargeMediaRequest(req: express.Request) {
+  return (req.path === "/api/admin/media" && req.method === "POST")
+    || (/^\/api\/admin\/media\/\d+\/content$/.test(req.path) && req.method === "PUT");
+}
+app.use((req, res, next) => isLargeMediaRequest(req) ? next() : standardJson(req, res, next));
 
 const PgStore = connectPgSimple(session);
 const sessionStore = pool ? new PgStore({ pool, tableName: "website_sessions", createTableIfMissing: true }) : undefined;
@@ -151,8 +151,20 @@ function loginBlocked(key: string) {
   return entry.blockedUntil > Date.now();
 }
 
+function trimFailedLogins(now: number) {
+  for (const [key, value] of failedLogins) {
+    if (value.resetAt <= now) failedLogins.delete(key);
+  }
+  while (failedLogins.size >= 5000) {
+    const oldestKey = failedLogins.keys().next().value as string | undefined;
+    if (!oldestKey) break;
+    failedLogins.delete(oldestKey);
+  }
+}
+
 function recordLoginFailure(key: string) {
   const now = Date.now();
+  trimFailedLogins(now);
   const current = failedLogins.get(key);
   const entry = !current || current.resetAt <= now ? { failures: 0, resetAt: now + 15 * 60_000, blockedUntil: 0 } : current;
   entry.failures += 1;
@@ -318,7 +330,7 @@ app.get("/api/admin/media", requireAdmin, async (_req, res) => {
   res.json({ media: result.rows.map((item) => ({ ...item, url: `/api/media/${item.id}` })) });
 });
 
-app.post("/api/admin/media", requireAdmin, async (req, res) => {
+app.post("/api/admin/media", requireAdmin, mediaJson, async (req, res) => {
   if (!pool) return res.status(503).json({ message: "Database is required for persistent media uploads" });
   const decoded = decodeMedia({ base64: req.body?.base64, mimeType: req.body?.mimeType });
   if ("error" in decoded) return res.status(400).json({ message: decoded.error });
@@ -342,7 +354,7 @@ app.patch("/api/admin/media/:id", requireAdmin, async (req, res) => {
   res.json({ ...result.rows[0], url: `/api/media/${id}` });
 });
 
-app.put("/api/admin/media/:id/content", requireAdmin, async (req, res) => {
+app.put("/api/admin/media/:id/content", requireAdmin, mediaJson, async (req, res) => {
   if (!pool) return res.status(503).json({ message: "Database is not configured" });
   const id = Number(req.params.id);
   const decoded = decodeMedia({ base64: req.body?.base64, mimeType: req.body?.mimeType });
