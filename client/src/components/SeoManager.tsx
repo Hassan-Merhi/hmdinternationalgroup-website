@@ -61,6 +61,7 @@ export function SeoManager({ content }: { content: SiteContent }) {
 
   useEffect(() => {
     const seo = pageSeo(location.pathname, content);
+    const crumbs = seo.crumbs ?? [];
     const canonicalPath = location.pathname === "/" ? "/" : location.pathname.replace(/\/$/, "");
     const canonical = `${baseUrl}${canonicalPath}`;
     const socialImage = content.seoSocialImageUrl || content.heroImageUrl;
@@ -133,10 +134,10 @@ export function SeoManager({ content }: { content: SiteContent }) {
       },
     ];
 
-    if (seo.crumbs.length) {
+    if (crumbs.length) {
       const items = [{ name: "Home", url: baseUrl }];
       let current = "";
-      for (const crumb of seo.crumbs) {
+      for (const crumb of crumbs) {
         const segment = crumb.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
         current += `/${segment}`;
         items.push({ name: crumb, url: `${baseUrl}${current}` });
