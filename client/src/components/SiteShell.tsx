@@ -11,7 +11,8 @@ const navItems = [
   ["/products", "Products"],
   ["/process", "Process"],
   ["/companies/hmd-international-group", "HMD"],
-  ["/export-markets", "Export markets"],
+  ["/export-markets", "Export"],
+  ["/sustainability", "Reuse"],
   ["/gallery", "Gallery"],
 ] as const;
 
@@ -85,7 +86,8 @@ export function SiteShell() {
           <Link to="/products">Products</Link>
           <Link to="/process">Process</Link>
           <Link to="/companies/hmd-international-group">HMD</Link>
-          <Link to="/export-markets">Export markets</Link>
+          <Link to="/export-markets">Export & logistics</Link>
+          <Link to="/sustainability">Textile reuse</Link>
           <Link to="/gallery">Gallery</Link>
           <Link to="/contact">Contact</Link>
           <a href={`mailto:${content.contactEmail}`}>{content.contactEmail}</a>
