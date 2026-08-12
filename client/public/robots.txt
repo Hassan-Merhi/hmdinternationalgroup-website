@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /admin
 
-Sitemap: https://hmdinternationalgroup.com/sitemap.xml
+Sitemap: https://samwatex.com/sitemap.xml

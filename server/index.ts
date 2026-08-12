@@ -5,7 +5,7 @@ import express from "express";
 import session from "express-session";
 import connectPgSimple from "connect-pg-simple";
 import type { SiteContent } from "../shared/siteContent.js";
-import { defaultSiteContent } from "../shared/siteContent.js";
+import { defaultSiteContent, normalizeSiteContent } from "../shared/siteContent.js";
 import { initializeDatabase, pool } from "./db.js";
 
 const app = express();
@@ -23,7 +23,7 @@ const sessionStore = pool
 
 app.use(
   session({
-    name: "hmd.site.admin",
+    name: "samwatex.site.admin",
     secret: process.env.SESSION_SECRET || crypto.randomBytes(32).toString("hex"),
     resave: false,
     saveUninitialized: false,
@@ -59,7 +59,7 @@ app.get("/api/health", (_req, res) => res.json({ ok: true }));
 app.get("/api/site-content", async (_req, res) => {
   if (!pool) return res.json(memoryContent);
   const result = await pool.query<{ content: SiteContent }>("SELECT content FROM site_content WHERE id = 1");
-  res.json(result.rows[0]?.content || defaultSiteContent);
+  res.json(normalizeSiteContent(result.rows[0]?.content || defaultSiteContent));
 });
 
 app.post("/api/admin/login", (req, res) => {
@@ -81,8 +81,8 @@ app.get("/api/admin/session", (req, res) => {
 });
 
 app.put("/api/admin/site-content", requireAdmin, async (req, res) => {
-  const content = req.body as SiteContent;
-  if (!content || typeof content.heroTitle !== "string" || !Array.isArray(content.businesses)) {
+  const content = normalizeSiteContent(req.body);
+  if (!content || typeof content.heroTitle !== "string" || !Array.isArray(content.capabilities)) {
     return res.status(400).json({ message: "Invalid site content" });
   }
   if (!pool) {
@@ -123,11 +123,11 @@ if (isProduction) {
 async function start() {
   await initializeDatabase();
   app.listen(port, "0.0.0.0", () => {
-    console.log(`HMD website server listening on ${port}`);
+    console.log(`SAMWATEX website server listening on ${port}`);
   });
 }
 
 start().catch((error) => {
-  console.error("Unable to start HMD website", error);
+  console.error("Unable to start SAMWATEX website", error);
   process.exit(1);
 });

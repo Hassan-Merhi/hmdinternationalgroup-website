@@ -1,45 +1,74 @@
-import { Link, NavLink, Outlet } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
 
 const navItems = [
   ["/", "Home"],
   ["/about", "About"],
-  ["/businesses", "Businesses"],
+  ["/what-we-do", "What we do"],
   ["/contact", "Contact"],
 ] as const;
 
 export function SiteShell() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [location.pathname]);
+
+  useEffect(() => {
+    document.body.classList.toggle("nav-open", menuOpen);
+    return () => document.body.classList.remove("nav-open");
+  }, [menuOpen]);
+
   return (
     <div className="site-shell">
       <header className="site-header">
-        <Link to="/" className="brand" aria-label="HMD International Group home">
-          <span className="brand-mark">HMD</span>
+        <Link to="/" className="brand" aria-label="SAMWATEX home">
+          <span className="brand-mark">SAMWATEX</span>
           <span className="brand-copy">International Group</span>
         </Link>
-        <nav className="main-nav" aria-label="Primary navigation">
+
+        <nav className={`main-nav ${menuOpen ? "open" : ""}`} aria-label="Primary navigation">
           {navItems.map(([to, label]) => (
             <NavLink key={to} to={to} end={to === "/"}>
               {label}
             </NavLink>
           ))}
+          <Link className="mobile-nav-contact" to="/contact">Start an enquiry ↗</Link>
         </nav>
-        <Link className="header-cta" to="/contact">
-          Talk to us
-        </Link>
+
+        <div className="header-actions">
+          <Link className="header-cta" to="/contact">Talk to us</Link>
+          <button
+            className={`menu-toggle ${menuOpen ? "active" : ""}`}
+            type="button"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen((open) => !open)}
+          >
+            <span /><span />
+          </button>
+        </div>
       </header>
-      <main>
-        <Outlet />
-      </main>
+
+      <main><Outlet /></main>
+
       <footer className="site-footer">
-        <div>
-          <div className="footer-mark">HMD</div>
-          <p>International Group</p>
+        <div className="footer-brand-block">
+          <div className="footer-mark">SAMWATEX</div>
+          <p>Lebanon based. Internationally connected.</p>
         </div>
         <div className="footer-links">
           <Link to="/about">About</Link>
-          <Link to="/businesses">Businesses</Link>
+          <Link to="/what-we-do">What we do</Link>
           <Link to="/contact">Contact</Link>
+          <a href="mailto:sales@samwatex.com">sales@samwatex.com</a>
         </div>
-        <p className="footer-meta">© {new Date().getFullYear()} HMD International Group</p>
+        <div className="footer-meta">
+          <p>Beirut · Lebanon</p>
+          <p>© {new Date().getFullYear()} SAMWATEX</p>
+        </div>
       </footer>
     </div>
   );

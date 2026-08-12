@@ -1,13 +1,13 @@
 import type { SiteContent } from "@shared/siteContent";
-import { defaultSiteContent } from "@shared/siteContent";
+import { defaultSiteContent, normalizeSiteContent } from "@shared/siteContent";
 
 export async function getSiteContent(): Promise<SiteContent> {
   try {
     const response = await fetch("/api/site-content");
     if (!response.ok) throw new Error("Unable to load site content");
-    return (await response.json()) as SiteContent;
+    return normalizeSiteContent(await response.json());
   } catch {
-    return defaultSiteContent;
+    return structuredClone(defaultSiteContent);
   }
 }
 
@@ -42,5 +42,5 @@ export async function saveSiteContent(content: SiteContent): Promise<SiteContent
     const body = (await response.json().catch(() => ({}))) as { message?: string };
     throw new Error(body.message || "Unable to save content");
   }
-  return (await response.json()) as SiteContent;
+  return normalizeSiteContent(await response.json());
 }

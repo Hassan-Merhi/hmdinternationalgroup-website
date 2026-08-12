@@ -1,62 +1,63 @@
-# HMD International Group — Public Website
+# SAMWATEX — Corporate Website
 
-Public corporate website for HMD International Group. This repository is intentionally separate from the ERP application and contains no ERP source code, routes, database access, or credentials.
+Premium branded corporate website for **SAMWATEX**, a Lebanon-based parent group with international trade and export activity. HMD International Group is represented as an operating company under SAMWATEX.
 
-## Architecture
+> The GitHub repository currently retains its original starter-repo name. The public product, code, content and deployment configuration are SAMWATEX-first.
 
-- React + Vite frontend
-- Express API/backend
-- PostgreSQL-backed editable site content
-- Admin login/content editor foundation
-- Render Blueprint (`render.yaml`) for web service + Postgres
-- GitHub Actions build/type-check CI
+## Current scope
 
-## Planned production domains
+- Responsive React + TypeScript + Vite public frontend
+- Express + TypeScript backend
+- PostgreSQL persistence for editable site content and enquiries
+- Password-protected `/admin` content editor foundation
+- SAMWATEX parent-company content model with subsidiaries
+- Premium responsive homepage for phone, tablet, laptop and desktop
+- About, Story, Vision & Mission, What We Do and Contact pages
+- Render Blueprint for a standalone web service + PostgreSQL database
 
-- `hmdinternationalgroup.com` — public website
-- `www.hmdinternationalgroup.com` — redirect/canonical public website
-- `erp.hmdinternationalgroup.com` — separate existing ERP deployment
+## Brand structure
+
+- **SAMWATEX** — parent company, based in Lebanon
+- **HMD International Group** — operating company under SAMWATEX
+- Export markets include Africa, the Middle East and other international markets
+- The website does not claim physical SAMWATEX offices outside Lebanon
+
+## Public routes
+
+- `/` — SAMWATEX homepage
+- `/about` — Who We Are + values
+- `/about/story` — Group story + structure
+- `/about/vision` — Vision + mission
+- `/what-we-do` — International trade, sourcing and distribution capabilities
+- `/contact` — Commercial enquiry and Beirut contact details
+- `/admin` — Private content editor
+
+## Contact details
+
+- Email: `sales@samwatex.com`
+- Phone: `+961 81 333 194`
+- Address: Beirut Port Free Zone, Ezzeldine Building, Floor (-1), Hadath San Therez, Baabda, Lebanon
 
 ## Local development
 
-1. Copy `.env.example` to `.env` and fill the values.
-2. Install dependencies with `npm install`.
-3. Run `npm run dev`.
+```bash
+npm install
+cp .env.example .env
+npm run dev
+```
 
-The frontend is served by Vite in development. The Express API runs in the same Node process and exposes public content/contact endpoints plus authenticated admin endpoints.
+Frontend: `http://localhost:5173`  
+Backend API: `http://localhost:3001`
 
-## Admin foundation
+## Render deployment
 
-The initial `/admin` page supports login and editing the core public site content. The first version uses environment-configured administrator credentials. Before production launch, expand the media area with persistent object storage (for example Cloudinary, S3-compatible storage, or Render-compatible external storage) rather than storing uploaded images on the web service filesystem.
+The included `render.yaml` provisions a standalone SAMWATEX web service and PostgreSQL database. The intended production domain is:
 
-## Required environment variables
+- `samwatex.com`
+- `www.samwatex.com`
 
-- `DATABASE_URL`
-- `SESSION_SECRET`
-- `ADMIN_USERNAME`
-- `ADMIN_PASSWORD`
-- `NODE_ENV=production`
+Before the first public deployment, set `ADMIN_PASSWORD` in Render and use a strong generated `SESSION_SECRET`.
 
-See `.env.example` and `render.yaml`.
+## Build programme
 
-## Deployment
-
-The repository includes a Render Blueprint. Deploy it as its own Render project/service; do not attach the public-domain root to the ERP service.
-
-Before moving the production domain:
-
-1. Deploy and test the website on its temporary Render hostname.
-2. Upload final branding/photos and verify public content.
-3. Move the ERP custom domain to `erp.hmdinternationalgroup.com` and verify login/API/passkey configuration.
-4. Point `hmdinternationalgroup.com` and `www.hmdinternationalgroup.com` at this website.
-5. Disable any obsolete ERP public hostnames where appropriate.
-
-## Security
-
-- Do not commit secrets.
-- Keep the website database separate from the ERP database.
-- Use a long random `SESSION_SECRET` and strong administrator credentials.
-- Protect the admin route with rate limiting/MFA before production launch.
-- Store uploaded media in persistent external/object storage.
-
-See `SECURITY.md` for the intended separation model.
+Phases 1–3 establish the SAMWATEX foundation, premium homepage and corporate identity pages. Subsequent phases expand subsidiaries, HMD’s full profile, product/industry content, markets, media management, CMS capability, visual refinement and final launch hardening.
