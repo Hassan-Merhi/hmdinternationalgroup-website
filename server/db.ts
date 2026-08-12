@@ -11,6 +11,7 @@ export const pool = process.env.DATABASE_URL
 
 export async function initializeDatabase() {
   if (!pool) return;
+
   await pool.query(`
     CREATE TABLE IF NOT EXISTS site_content (
       id INTEGER PRIMARY KEY DEFAULT 1 CHECK (id = 1),
@@ -18,6 +19,7 @@ export async function initializeDatabase() {
       updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
     );
   `);
+
   await pool.query(`
     CREATE TABLE IF NOT EXISTS website_inquiries (
       id BIGSERIAL PRIMARY KEY,
@@ -28,6 +30,7 @@ export async function initializeDatabase() {
       created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
     );
   `);
+
   await pool.query(`
     ALTER TABLE website_inquiries
       ADD COLUMN IF NOT EXISTS inquiry_type TEXT NOT NULL DEFAULT 'general',
@@ -39,8 +42,54 @@ export async function initializeDatabase() {
       ADD COLUMN IF NOT EXISTS status TEXT NOT NULL DEFAULT 'new',
       ADD COLUMN IF NOT EXISTS source_path TEXT;
   `);
+
   await pool.query(`
     CREATE INDEX IF NOT EXISTS website_inquiries_status_created_idx
       ON website_inquiries (status, created_at DESC);
+  `);
+
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS website_media (
+      id BIGSERIAL PRIMARY KEY,
+      file_name TEXT NOT NULL,
+      mime_type TEXT NOT NULL,
+      file_bytes BYTEA NOT NULL,
+      size_bytes INTEGER NOT NULL,
+      alt_text TEXT NOT NULL DEFAULT '',
+      caption TEXT NOT NULL DEFAULT '',
+      category TEXT NOT NULL DEFAULT 'General',
+      sort_order INTEGER NOT NULL DEFAULT 0,
+      created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+      updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    );
+  `);
+
+  await pool.query(`
+    CREATE INDEX IF NOT EXISTS website_media_sort_idx
+      ON website_media (sort_order, created_at DESC);
+  `);
+
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS website_admins (
+      id BIGSERIAL PRIMARY KEY,
+      username TEXT NOT NULL UNIQUE,
+      display_name TEXT NOT NULL,
+      password_salt TEXT NOT NULL,
+      password_hash TEXT NOT NULL,
+      role TEXT NOT NULL DEFAULT 'admin',
+      active BOOLEAN NOT NULL DEFAULT TRUE,
+      created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+      updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    );
+  `);
+
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS website_admin_audit (
+      id BIGSERIAL PRIMARY KEY,
+      admin_username TEXT NOT NULL,
+      action TEXT NOT NULL,
+      details JSONB NOT NULL DEFAULT '{}'::jsonb,
+      created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    );
   `);
 }
