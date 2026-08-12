@@ -45,6 +45,11 @@ export type GalleryItem = {
   imageUrl: string;
 };
 
+export type StatItem = {
+  value: string;
+  label: string;
+};
+
 export type SiteContent = {
   brandName: string;
   brandDescriptor: string;
@@ -65,11 +70,16 @@ export type SiteContent = {
   markets: MarketItem[];
   galleryTitle: string;
   galleryItems: GalleryItem[];
+  statsTitle: string;
+  stats: StatItem[];
   contactEmail: string;
   contactPhone: string;
   whatsappPhone: string;
   contactAddress: string;
   footerText: string;
+  seoTitle: string;
+  seoDescription: string;
+  seoSocialImageUrl: string;
 };
 
 export const defaultSiteContent: SiteContent = {
@@ -250,19 +260,28 @@ export const defaultSiteContent: SiteContent = {
       imageUrl: "",
     },
   ],
+  statsTitle: "One base. A wider commercial horizon.",
+  stats: [
+    { value: "Lebanon", label: "Home base" },
+    { value: "Africa", label: "Export market" },
+    { value: "Middle East", label: "Regional market" },
+    { value: "HMD", label: "Operating company" },
+  ],
   contactEmail: "sales@samwatex.com",
   contactPhone: "+96181333194",
   whatsappPhone: "",
   contactAddress: "Beirut Port Free Zone, Ezzeldine Building, Floor (-1), Hadath San Therez, Baabda, Lebanon",
   footerText: "SAMWATEX. All rights reserved.",
+  seoTitle: "SAMWATEX — International Trade & Export Group",
+  seoDescription:
+    "SAMWATEX is a Lebanon-based international group connecting sourcing, trade and export opportunities with markets across Africa, the Middle East and beyond.",
+  seoSocialImageUrl: "",
 };
 
 export function normalizeSiteContent(value: unknown): SiteContent {
   if (!value || typeof value !== "object") return structuredClone(defaultSiteContent);
   const input = value as Partial<SiteContent> & { businesses?: Capability[]; locations?: unknown[] };
 
-  // The repository started as an HMD-only concept. Treat that initial payload as
-  // legacy so a previously seeded database cannot override the SAMWATEX rebrand.
   if (input.brandName === "HMD International Group") {
     return {
       ...structuredClone(defaultSiteContent),
@@ -289,5 +308,6 @@ export function normalizeSiteContent(value: unknown): SiteContent {
     galleryItems: Array.isArray(input.galleryItems)
       ? input.galleryItems
       : structuredClone(defaultSiteContent.galleryItems),
+    stats: Array.isArray(input.stats) ? input.stats : structuredClone(defaultSiteContent.stats),
   };
 }
