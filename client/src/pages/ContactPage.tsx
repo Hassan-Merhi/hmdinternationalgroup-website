@@ -25,9 +25,11 @@ export function ContactPage() {
   const requestedType = searchParams.get("type");
   const defaultType = inquiryTypes.some(([value]) => value === requestedType) ? requestedType! : "general";
   const [inquiryType, setInquiryType] = useState(defaultType);
+  const [companyInterest, setCompanyInterest] = useState(defaultType === "hmd" ? "HMD International Group" : "SAMWATEX");
 
   useEffect(() => {
     setInquiryType(defaultType);
+    setCompanyInterest(defaultType === "hmd" ? "HMD International Group" : "SAMWATEX");
   }, [defaultType]);
 
   useEffect(() => {
@@ -55,6 +57,7 @@ export function ContactPage() {
       }
       formElement.reset();
       setInquiryType("general");
+      setCompanyInterest("SAMWATEX");
       setReference(body.reference || "");
       setStatus("Thank you. Your business enquiry has been received by SAMWATEX.");
     } catch {
@@ -93,7 +96,11 @@ export function ContactPage() {
           </div>
 
           <label className="form-span-2">Enquiry type
-            <select name="inquiryType" value={inquiryType} onChange={(event) => setInquiryType(event.target.value)} required>
+            <select name="inquiryType" value={inquiryType} onChange={(event) => {
+              const value = event.target.value;
+              setInquiryType(value);
+              if (value === "hmd") setCompanyInterest("HMD International Group");
+            }} required>
               {inquiryTypes.map(([value, label]) => <option value={value} key={value}>{label}</option>)}
             </select>
           </label>
@@ -105,7 +112,7 @@ export function ContactPage() {
           <label>Phone<input name="phone" type="tel" autoComplete="tel" maxLength={60} /></label>
           <label>WhatsApp<input name="whatsapp" type="tel" maxLength={60} /></label>
           <label>Company of interest
-            <select name="companyInterest" defaultValue={inquiryType === "hmd" ? "HMD International Group" : "SAMWATEX"}>
+            <select name="companyInterest" value={companyInterest} onChange={(event) => setCompanyInterest(event.target.value)}>
               <option>SAMWATEX</option>
               <option>HMD International Group</option>
               <option>Not sure / Group enquiry</option>
