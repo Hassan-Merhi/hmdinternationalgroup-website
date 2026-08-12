@@ -92,7 +92,7 @@ export function CompanyProfilePage() {
         </div>
         <div className="contact-band-actions">
           <a href={`mailto:${content.contactEmail}`}>{content.contactEmail}</a>
-          <Link className="button light" to="/contact">Start an enquiry</Link>
+          <Link className="button light" to="/contact?type=hmd">Start an HMD enquiry</Link>
         </div>
       </section>
     </div>
