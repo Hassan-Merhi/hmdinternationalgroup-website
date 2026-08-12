@@ -4,6 +4,8 @@ import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
 const navItems = [
   ["/", "Home"],
   ["/about", "About"],
+  ["/companies", "Companies"],
+  ["/industries", "Industries"],
   ["/what-we-do", "What we do"],
   ["/contact", "Contact"],
 ] as const;
@@ -61,6 +63,8 @@ export function SiteShell() {
         </div>
         <div className="footer-links">
           <Link to="/about">About</Link>
+          <Link to="/companies">Companies</Link>
+          <Link to="/industries">Industries</Link>
           <Link to="/what-we-do">What we do</Link>
           <Link to="/contact">Contact</Link>
           <a href="mailto:sales@samwatex.com">sales@samwatex.com</a>
