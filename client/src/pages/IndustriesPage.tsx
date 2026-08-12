@@ -15,17 +15,17 @@ export function IndustriesPage() {
     <div className="inner-page industries-page">
       <section className="page-hero industries-hero">
         <p className="eyebrow light">Industries & products</p>
-        <h1>Commercial categories shaped by market demand.</h1>
+        <h1>Product categories selected around real customer demand.</h1>
         <p className="page-hero-copy">
-          SAMWATEX combines product sourcing, international trade and distribution capability across selected categories through its operating companies.
+          SAMWATEX and HMD International Group work across textiles, apparel, general merchandise and international trade, with sourcing shaped by specification, quantity, destination and timing.
         </p>
       </section>
 
       <section className="industry-intro section-pad">
-        <div className="section-label">Our commercial focus</div>
+        <div className="section-label">Commercial focus</div>
         <div className="editorial-copy">
           <h2>{content.industriesTitle}</h2>
-          <p>Our model is not limited to one product line. We focus on categories where sourcing relationships, market knowledge and dependable execution can create long-term value.</p>
+          <p>We are not tied to a single product line. The focus is on categories where we can source responsibly, understand the commercial requirement and supply the destination market on workable terms.</p>
         </div>
       </section>
 
@@ -46,8 +46,8 @@ export function IndustriesPage() {
 
       <section className="product-collections section-pad section-warm">
         <div className="section-heading-row">
-          <div><p className="eyebrow">Product portfolio</p><h2>Structured for a catalog that can grow.</h2></div>
-          <p className="section-note">Exact brands, SKUs and photography will be added as approved public content becomes available; the site structure is ready for that expansion.</p>
+          <div><p className="eyebrow">Product portfolio</p><h2>Selected categories, sourced to requirement.</h2></div>
+          <p className="section-note">Availability and assortments vary by supplier and destination market. Send us the specification, quantity and target destination for a commercial discussion.</p>
         </div>
         <div className="product-collection-grid">
           {content.productCollections.map((collection, index) => (
@@ -64,7 +64,7 @@ export function IndustriesPage() {
       <section className="industry-company-link section-pad">
         <div>
           <p className="eyebrow">Operating company</p>
-          <h2>HMD International Group brings these commercial capabilities to market.</h2>
+          <h2>HMD International Group handles the market-facing trading activity.</h2>
         </div>
         <Link className="button dark" to="/companies/hmd-international-group">View HMD profile</Link>
       </section>
