@@ -36,6 +36,15 @@ export type ProductCollection = {
   examples: string[];
 };
 
+export type GalleryItem = {
+  id: string;
+  category: string;
+  company: string;
+  title: string;
+  description: string;
+  imageUrl: string;
+};
+
 export type SiteContent = {
   brandName: string;
   brandDescriptor: string;
@@ -54,6 +63,8 @@ export type SiteContent = {
   productCollections: ProductCollection[];
   marketsTitle: string;
   markets: MarketItem[];
+  galleryTitle: string;
+  galleryItems: GalleryItem[];
   contactEmail: string;
   contactPhone: string;
   whatsappPhone: string;
@@ -188,6 +199,57 @@ export const defaultSiteContent: SiteContent = {
       description: "A flexible export platform built to pursue the right opportunities globally.",
     },
   ],
+  galleryTitle: "The work, movement and companies behind the group.",
+  galleryItems: [
+    {
+      id: "samwatex-group",
+      category: "SAMWATEX",
+      company: "SAMWATEX",
+      title: "A group built from Lebanon outward.",
+      description: "Corporate storytelling for the parent group, its commercial relationships and international outlook.",
+      imageUrl: "",
+    },
+    {
+      id: "hmd-operating-company",
+      category: "HMD",
+      company: "HMD International Group",
+      title: "Commercial execution inside the group.",
+      description: "The operating-company story behind sourcing, trading, distribution and market fulfilment.",
+      imageUrl: "",
+    },
+    {
+      id: "international-movement",
+      category: "Trade & Export",
+      company: "SAMWATEX",
+      title: "From requirement to international movement.",
+      description: "Visual space for future export, shipment and trade-coordination photography.",
+      imageUrl: "",
+    },
+    {
+      id: "textile-apparel",
+      category: "Products",
+      company: "HMD International Group",
+      title: "Textiles and apparel for market demand.",
+      description: "A flexible visual collection for apparel, textile goods and market-specific assortments.",
+      imageUrl: "",
+    },
+    {
+      id: "general-merchandise",
+      category: "Products",
+      company: "HMD International Group",
+      title: "Selected general merchandise.",
+      description: "Product storytelling designed to expand as exact public product lines and photography are added.",
+      imageUrl: "",
+    },
+    {
+      id: "partner-coordination",
+      category: "Operations",
+      company: "SAMWATEX",
+      title: "Relationships behind dependable execution.",
+      description: "A visual layer for sourcing, commercial coordination and the partners that connect supply with market opportunity.",
+      imageUrl: "",
+    },
+  ],
   contactEmail: "sales@samwatex.com",
   contactPhone: "+96181333194",
   whatsappPhone: "",
@@ -224,5 +286,8 @@ export function normalizeSiteContent(value: unknown): SiteContent {
       ? input.productCollections
       : structuredClone(defaultSiteContent.productCollections),
     markets: Array.isArray(input.markets) ? input.markets : structuredClone(defaultSiteContent.markets),
+    galleryItems: Array.isArray(input.galleryItems)
+      ? input.galleryItems
+      : structuredClone(defaultSiteContent.galleryItems),
   };
 }
