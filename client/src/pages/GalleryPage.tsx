@@ -16,8 +16,8 @@ export function GalleryPage() {
     <div className="inner-page gallery-page">
       <section className="page-hero gallery-hero">
         <p className="eyebrow light">Gallery</p>
-        <h1>The work, movement and companies behind SAMWATEX.</h1>
-        <p className="page-hero-copy">A visual layer for the group, its operating companies, products and commercial activity—managed directly from the private SAMWATEX media library.</p>
+        <h1>Products, operations and the work behind SAMWATEX.</h1>
+        <p className="page-hero-copy">A closer view of the group, HMD International Group, commercial categories and export activity.</p>
       </section>
 
       <section className="gallery-section section-pad">
@@ -30,8 +30,6 @@ export function GalleryPage() {
             <article className={`gallery-card gallery-card-${(index % 5) + 1}`} key={item.id}>
               <div className={`gallery-visual ${item.imageUrl ? "has-image" : ""}`}>
                 {item.imageUrl && <img src={item.imageUrl} alt={item.title} loading="lazy" decoding="async" />}
-                <div className="gallery-visual-grid" aria-hidden="true" />
-                <span className="gallery-code">SWX / {String(index + 1).padStart(2, "0")}</span>
                 <span className="gallery-category">{item.category}</span>
               </div>
               <div className="gallery-card-copy"><p className="eyebrow">{item.company}</p><h2>{item.title}</h2><p>{item.description}</p></div>
@@ -41,8 +39,8 @@ export function GalleryPage() {
       </section>
 
       <section className="gallery-story-band section-dark section-pad">
-        <div><p className="eyebrow light">Visual storytelling</p><h2>Built to evolve as the SAMWATEX image library grows.</h2></div>
-        <p>Administrators can upload, replace and reorder photography in the private CMS, then assign those assets to the hero, gallery and social sharing without touching the codebase.</p>
+        <div><p className="eyebrow light">From the business</p><h2>A visual record of products, trading activity and market supply.</h2></div>
+        <p>Photography is kept close to the work: products, shipments, operations and the companies responsible for them.</p>
         <Link className="button ghost" to="/companies/hmd-international-group">Explore HMD</Link>
       </section>
     </div>
