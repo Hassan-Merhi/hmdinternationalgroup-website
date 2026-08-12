@@ -7,23 +7,23 @@ import { getSiteContent } from "@client/lib/api";
 const exportSteps = [
   {
     number: "01",
-    title: "Understand the requirement",
-    description: "Start with the product, destination, quantity, timing and commercial objective behind the enquiry.",
+    title: "Define the buyer brief",
+    description: "Start with destination, product categories, season, preferred condition or grade and expected order volume.",
   },
   {
     number: "02",
-    title: "Align supply",
-    description: "Coordinate sourcing and product availability around the needs of the customer and target market.",
+    title: "Match the assortment",
+    description: "Align available sorted product with the categories and market mix the buyer is actually looking for.",
   },
   {
     number: "03",
-    title: "Coordinate export",
-    description: "Bring the commercial and movement details together from SAMWATEX's base in Lebanon.",
+    title: "Prepare the shipment",
+    description: "Bale, identify and stage confirmed goods for handling and container loading from Lebanon.",
   },
   {
     number: "04",
-    title: "Support market fulfilment",
-    description: "Work with operating companies and partners to keep execution practical, visible and dependable.",
+    title: "Coordinate export",
+    description: "Bring the commercial order and physical movement together for the destination market.",
   },
 ];
 
@@ -35,12 +35,12 @@ export function GlobalReachPage() {
   }, []);
 
   return (
-    <div className="inner-page reach-page">
-      <section className="page-hero reach-hero">
-        <p className="eyebrow light">Global reach</p>
-        <h1>One base. Commercial reach that extends further.</h1>
+    <div className="inner-page reach-page textile-export-page">
+      <section className="page-hero reach-hero textile-page-hero">
+        <p className="eyebrow light">Export markets</p>
+        <h1>Wholesale textile exports from one operating base in Lebanon.</h1>
         <p className="page-hero-copy">
-          SAMWATEX is based in Lebanon. From there, the group develops sourcing, trade and export relationships across Africa, the Middle East and selected international markets.
+          SAMWATEX prepares reusable clothing and textile goods in Lebanon for wholesale customers across Africa, the Middle East and selected additional markets.
         </p>
       </section>
 
@@ -48,19 +48,19 @@ export function GlobalReachPage() {
         <div className="section-heading-row">
           <div>
             <p className="eyebrow">From Lebanon</p>
-            <h2>Our base is fixed. Our market view is international.</h2>
+            <h2>The product is prepared here. The demand is wider.</h2>
           </div>
           <p className="section-note">
-            The highlighted regions are export markets and commercial relationships—not SAMWATEX office locations.
+            The highlighted regions represent export markets and commercial relationships. SAMWATEX does not present them as overseas office locations.
           </p>
         </div>
 
-        <div className="reach-map" aria-label="SAMWATEX export reach from Lebanon to international markets">
+        <div className="reach-map" aria-label="SAMWATEX wholesale textile export reach from Lebanon">
           <div className="reach-map-grid" aria-hidden="true" />
           <div className="reach-origin">
-            <span>Based in</span>
+            <span>Operating base</span>
             <strong>Lebanon</strong>
-            <small>Commercial & export base</small>
+            <small>Sorting · grading · export</small>
           </div>
           <div className="reach-route route-one" aria-hidden="true" />
           <div className="reach-route route-two" aria-hidden="true" />
@@ -78,11 +78,11 @@ export function GlobalReachPage() {
       <section className="reach-principles section-pad section-dark">
         <div className="section-heading-row">
           <div>
-            <p className="eyebrow light">How we work</p>
-            <h2>A practical path from opportunity to market.</h2>
+            <p className="eyebrow light">Export workflow</p>
+            <h2>The destination influences the product before loading begins.</h2>
           </div>
           <p className="section-note light-note">
-            Every market is different. The operating model stays disciplined while the commercial approach adapts to the requirement.
+            A useful export order starts with a clear market brief, then works backward into categories, assortment, baling and shipment preparation.
           </p>
         </div>
         <div className="reach-step-grid">
@@ -99,7 +99,7 @@ export function GlobalReachPage() {
       <section className="market-detail-section section-pad">
         <div className="section-heading-row">
           <div><p className="eyebrow">Markets served</p><h2>{content.marketsTitle}</h2></div>
-          <Link className="text-link" to="/contact">Discuss a market <span>↗</span></Link>
+          <Link className="text-link" to="/contact?type=export">Discuss a market <span>↗</span></Link>
         </div>
         <div className="market-detail-grid">
           {content.markets.map((market, index) => (
@@ -111,10 +111,10 @@ export function GlobalReachPage() {
         </div>
       </section>
 
-      <section className="contact-band reach-contact-band">
+      <section className="contact-band reach-contact-band textile-contact-band">
         <div>
-          <p className="eyebrow light">Export enquiries</p>
-          <h2>Have a product requirement or market opportunity?</h2>
+          <p className="eyebrow">Export enquiries</p>
+          <h2>Tell us the destination and product mix you need.</h2>
         </div>
         <Link className="button light" to="/contact?type=export">Start an export enquiry</Link>
       </section>
