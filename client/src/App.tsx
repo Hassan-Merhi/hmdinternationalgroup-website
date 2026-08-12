@@ -8,6 +8,8 @@ import { BusinessesPage } from "@client/pages/BusinessesPage";
 import { CompaniesPage } from "@client/pages/CompaniesPage";
 import { CompanyProfilePage } from "@client/pages/CompanyProfilePage";
 import { IndustriesPage } from "@client/pages/IndustriesPage";
+import { GlobalReachPage } from "@client/pages/GlobalReachPage";
+import { GalleryPage } from "@client/pages/GalleryPage";
 import { ContactPage } from "@client/pages/ContactPage";
 import { AdminPage } from "@client/pages/AdminPage";
 
@@ -24,6 +26,8 @@ export default function App() {
           <Route path="/companies" element={<CompaniesPage />} />
           <Route path="/companies/:slug" element={<CompanyProfilePage />} />
           <Route path="/industries" element={<IndustriesPage />} />
+          <Route path="/global-reach" element={<GlobalReachPage />} />
+          <Route path="/gallery" element={<GalleryPage />} />
           <Route path="/what-we-do" element={<BusinessesPage />} />
           <Route path="/businesses" element={<Navigate to="/what-we-do" replace />} />
           <Route path="/contact" element={<ContactPage />} />
