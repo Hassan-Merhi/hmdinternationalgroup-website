@@ -8,13 +8,8 @@ export function GalleryPage() {
   const [content, setContent] = useState<SiteContent>(defaultSiteContent);
   const [category, setCategory] = useState("All");
 
-  useEffect(() => {
-    void getSiteContent().then(setContent);
-  }, []);
-  const categories = useMemo(
-    () => ["All", ...Array.from(new Set(content.galleryItems.map((item) => item.category)))],
-    [content.galleryItems],
-  );
+  useEffect(() => { void getSiteContent().then(setContent); }, []);
+  const categories = useMemo(() => ["All", ...Array.from(new Set(content.galleryItems.map((item) => item.category)))], [content.galleryItems]);
   const visibleItems = category === "All" ? content.galleryItems : content.galleryItems.filter((item) => item.category === category);
 
   return (
@@ -33,12 +28,8 @@ export function GalleryPage() {
         <div className="gallery-grid">
           {visibleItems.map((item, index) => (
             <article className={`gallery-card gallery-card-${(index % 5) + 1}`} key={item.id}>
-              <div
-                className={`gallery-visual ${item.imageUrl ? "has-image" : ""}`}
-                style={item.imageUrl ? { backgroundImage: `url(${item.imageUrl})` } : undefined}
-                role={item.imageUrl ? "img" : undefined}
-                aria-label={item.imageUrl ? item.title : undefined}
-              >
+              <div className={`gallery-visual ${item.imageUrl ? "has-image" : ""}`}>
+                {item.imageUrl && <img src={item.imageUrl} alt={item.title} loading="lazy" decoding="async" />}
                 <div className="gallery-visual-grid" aria-hidden="true" />
                 <span className="gallery-code">SWX / {String(index + 1).padStart(2, "0")}</span>
                 <span className="gallery-category">{item.category}</span>
