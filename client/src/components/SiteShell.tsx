@@ -44,7 +44,6 @@ export function SiteShell() {
   return (
     <div className="site-shell">
       <SeoManager content={content} />
-      <div className="site-grain" aria-hidden="true" />
       <header className={`site-header ${scrolled ? "scrolled" : ""}`}>
         <Link to="/" className="brand" aria-label={`${content.brandName} home`}>
           <span className="brand-mark">{content.brandName}</span>
@@ -55,11 +54,11 @@ export function SiteShell() {
           {navItems.map(([to, label]) => (
             <NavLink key={to} to={to}>{label}</NavLink>
           ))}
-          <Link className="mobile-nav-contact" to="/contact">Start an enquiry ↗</Link>
+          <Link className="mobile-nav-contact" to="/contact">Business enquiry ↗</Link>
         </nav>
 
         <div className="header-actions">
-          <Link className="header-cta" to="/contact">Talk to us</Link>
+          <Link className="header-cta" to="/contact">Enquire</Link>
           <button
             className={`menu-toggle ${menuOpen ? "active" : ""}`}
             type="button"
@@ -77,7 +76,7 @@ export function SiteShell() {
       <footer className="site-footer">
         <div className="footer-brand-block">
           <div className="footer-mark">{content.brandName}</div>
-          <p>Lebanon based. Internationally connected.</p>
+          <p>Trade and export from Lebanon.</p>
         </div>
         <div className="footer-links">
           <Link to="/about">About</Link>
