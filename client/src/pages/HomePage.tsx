@@ -13,6 +13,14 @@ const processPreview = [
   ["06", "Export", "Orders are coordinated for container loading and international shipment."],
 ] as const;
 
+const operatingRail = [
+  ["01", "Sort"],
+  ["02", "Grade"],
+  ["03", "Build"],
+  ["04", "Bale"],
+  ["05", "Export"],
+] as const;
+
 export function HomePage() {
   const [content, setContent] = useState<SiteContent>(defaultSiteContent);
 
@@ -20,7 +28,7 @@ export function HomePage() {
 
   return (
     <>
-      <section className="hero samwatex-hero textile-hero">
+      <section className="hero samwatex-hero textile-hero phase9-home-hero">
         <div className={`hero-media textile-hero-media ${content.heroImageUrl ? "has-image" : ""}`}>
           {content.heroImageUrl && <img className="hero-image" src={content.heroImageUrl} alt="" fetchPriority="high" decoding="async" />}
           <div className="textile-hero-grid" aria-hidden="true" />
@@ -40,6 +48,11 @@ export function HomePage() {
           <strong>Lebanon</strong>
           <i />
           <span>Sort · grade · bale · export</span>
+        </div>
+        <div className="phase9-hero-rail" aria-label="SAMWATEX operating sequence">
+          {operatingRail.map(([number, label]) => (
+            <span key={number}><b>{number}</b>{label}</span>
+          ))}
         </div>
       </section>
 
