@@ -10,6 +10,7 @@ declare module "express-session" {
 
 const production = process.env.NODE_ENV === "production";
 const maxMediaBytes = 8 * 1024 * 1024;
+const maxRateLimitBuckets = 5000;
 const allowedMediaTypes = new Set(["image/jpeg", "image/png", "image/webp", "image/gif", "application/pdf"]);
 const commonPasswords = new Set(["password", "password123", "123456789012", "qwerty123456", "administrator", "letmein123456"]);
 
@@ -71,7 +72,7 @@ export function sameOriginGuard(req: Request, res: Response, next: NextFunction)
   next();
 }
 
-export function securityHeaders(_req: Request, res: Response, next: NextFunction) {
+export function securityHeaders(req: Request, res: Response, next: NextFunction) {
   const directives = [
     "default-src 'self'",
     "base-uri 'self'",
@@ -94,14 +95,33 @@ export function securityHeaders(_req: Request, res: Response, next: NextFunction
   res.setHeader("X-Content-Type-Options", "nosniff");
   res.setHeader("X-Frame-Options", "DENY");
   res.setHeader("X-Permitted-Cross-Domain-Policies", "none");
+  res.setHeader("X-DNS-Prefetch-Control", "off");
   res.setHeader("Cross-Origin-Opener-Policy", "same-origin");
+  res.setHeader("Cross-Origin-Resource-Policy", "same-origin");
   res.setHeader("Origin-Agent-Cluster", "?1");
   res.setHeader("Permissions-Policy", "camera=(), microphone=(), geolocation=(), payment=(), usb=(), browsing-topics=()");
+  if (req.path.startsWith("/api/admin")) {
+    res.setHeader("Cache-Control", "no-store, max-age=0");
+    res.setHeader("Pragma", "no-cache");
+    res.setHeader("Expires", "0");
+  }
   if (production) res.setHeader("Strict-Transport-Security", "max-age=31536000; includeSubDomains; preload");
   next();
 }
 
 type RateState = { count: number; resetAt: number };
+
+function trimRateBuckets(buckets: Map<string, RateState>, now: number) {
+  if (buckets.size <= maxRateLimitBuckets) return;
+  for (const [bucketKey, value] of buckets) {
+    if (value.resetAt <= now) buckets.delete(bucketKey);
+  }
+  while (buckets.size > maxRateLimitBuckets) {
+    const oldestKey = buckets.keys().next().value as string | undefined;
+    if (!oldestKey) break;
+    buckets.delete(oldestKey);
+  }
+}
 
 export function createRateLimiter(options: { limit: number; windowMs: number; message: string }) {
   const buckets = new Map<string, RateState>();
@@ -112,9 +132,7 @@ export function createRateLimiter(options: { limit: number; windowMs: number; me
     if (!state || state.resetAt <= now) state = { count: 0, resetAt: now + options.windowMs };
     state.count += 1;
     buckets.set(key, state);
-    if (buckets.size > 5000) {
-      for (const [bucketKey, value] of buckets) if (value.resetAt <= now) buckets.delete(bucketKey);
-    }
+    trimRateBuckets(buckets, now);
     res.setHeader("X-RateLimit-Limit", String(options.limit));
     res.setHeader("X-RateLimit-Remaining", String(Math.max(0, options.limit - state.count)));
     if (state.count > options.limit) {
