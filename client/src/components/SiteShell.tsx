@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
 
 const navItems = [
-  ["/", "Home"],
   ["/about", "About"],
   ["/companies", "Companies"],
   ["/industries", "Industries"],
-  ["/what-we-do", "What we do"],
+  ["/global-reach", "Global reach"],
+  ["/gallery", "Gallery"],
   ["/contact", "Contact"],
 ] as const;
 
@@ -16,6 +16,7 @@ export function SiteShell() {
 
   useEffect(() => {
     setMenuOpen(false);
+    window.scrollTo({ top: 0, behavior: "auto" });
   }, [location.pathname]);
 
   useEffect(() => {
@@ -33,7 +34,7 @@ export function SiteShell() {
 
         <nav className={`main-nav ${menuOpen ? "open" : ""}`} aria-label="Primary navigation">
           {navItems.map(([to, label]) => (
-            <NavLink key={to} to={to} end={to === "/"}>
+            <NavLink key={to} to={to}>
               {label}
             </NavLink>
           ))}
@@ -65,6 +66,8 @@ export function SiteShell() {
           <Link to="/about">About</Link>
           <Link to="/companies">Companies</Link>
           <Link to="/industries">Industries</Link>
+          <Link to="/global-reach">Global reach</Link>
+          <Link to="/gallery">Gallery</Link>
           <Link to="/what-we-do">What we do</Link>
           <Link to="/contact">Contact</Link>
           <a href="mailto:sales@samwatex.com">sales@samwatex.com</a>
