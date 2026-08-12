@@ -54,6 +54,13 @@ function safeEqual(a: string, b: string) {
   return left.length === right.length && crypto.timingSafeEqual(left, right);
 }
 
+function text(value: unknown, maxLength: number) {
+  return typeof value === "string" ? value.trim().slice(0, maxLength) : "";
+}
+
+const inquiryTypes = new Set(["general", "product", "export", "supplier", "partnership", "hmd"]);
+const inquiryStatuses = new Set(["new", "read", "replied", "archived"]);
+
 app.get("/api/health", (_req, res) => res.json({ ok: true }));
 
 app.get("/api/site-content", async (_req, res) => {
@@ -99,18 +106,95 @@ app.put("/api/admin/site-content", requireAdmin, async (req, res) => {
   res.json(result.rows[0].content);
 });
 
+app.get("/api/admin/inquiries", requireAdmin, async (req, res) => {
+  if (!pool) return res.json({ inquiries: [] });
+  const requestedStatus = text(req.query.status, 30);
+  const status = inquiryStatuses.has(requestedStatus) ? requestedStatus : "";
+  const result = status
+    ? await pool.query(
+        `SELECT id, inquiry_type AS "inquiryType", name, email, company, country, phone, whatsapp,
+                company_interest AS "companyInterest", product_interest AS "productInterest",
+                message, status, source_path AS "sourcePath", created_at AS "createdAt"
+           FROM website_inquiries
+          WHERE status = $1
+          ORDER BY created_at DESC
+          LIMIT 200`,
+        [status],
+      )
+    : await pool.query(
+        `SELECT id, inquiry_type AS "inquiryType", name, email, company, country, phone, whatsapp,
+                company_interest AS "companyInterest", product_interest AS "productInterest",
+                message, status, source_path AS "sourcePath", created_at AS "createdAt"
+           FROM website_inquiries
+          ORDER BY created_at DESC
+          LIMIT 200`,
+      );
+  res.json({ inquiries: result.rows });
+});
+
+app.patch("/api/admin/inquiries/:id", requireAdmin, async (req, res) => {
+  if (!pool) return res.status(503).json({ message: "Database is not configured" });
+  const status = text(req.body?.status, 30);
+  if (!inquiryStatuses.has(status)) return res.status(400).json({ message: "Invalid inquiry status" });
+  const id = Number(req.params.id);
+  if (!Number.isSafeInteger(id) || id <= 0) return res.status(400).json({ message: "Invalid inquiry id" });
+  const result = await pool.query(
+    `UPDATE website_inquiries SET status = $1 WHERE id = $2 RETURNING id, status`,
+    [status, id],
+  );
+  if (!result.rowCount) return res.status(404).json({ message: "Inquiry not found" });
+  res.json(result.rows[0]);
+});
+
 app.post("/api/contact", async (req, res) => {
-  const { name, email, company, message } = req.body ?? {};
-  if (![name, email, message].every((value) => typeof value === "string" && value.trim())) {
-    return res.status(400).json({ message: "Name, email and message are required" });
+  const website = text(req.body?.website, 200);
+  if (website) return res.status(201).json({ ok: true });
+
+  const name = text(req.body?.name, 120);
+  const email = text(req.body?.email, 180).toLowerCase();
+  const company = text(req.body?.company, 180);
+  const country = text(req.body?.country, 120);
+  const phone = text(req.body?.phone, 60);
+  const whatsapp = text(req.body?.whatsapp, 60);
+  const companyInterest = text(req.body?.companyInterest, 180);
+  const productInterest = text(req.body?.productInterest, 180);
+  const message = text(req.body?.message, 4000);
+  const sourcePath = text(req.body?.sourcePath, 240) || "/contact";
+  const requestedType = text(req.body?.inquiryType, 30);
+  const inquiryType = inquiryTypes.has(requestedType) ? requestedType : "general";
+
+  if (!name || !email || !country || !message) {
+    return res.status(400).json({ message: "Name, business email, country and message are required" });
   }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return res.status(400).json({ message: "Please enter a valid business email address" });
+  }
+
+  let reference = `SWX-${Date.now().toString(36).toUpperCase()}`;
   if (pool) {
-    await pool.query(
-      "INSERT INTO website_inquiries (name, email, company, message) VALUES ($1, $2, $3, $4)",
-      [name.trim(), email.trim(), typeof company === "string" ? company.trim() : null, message.trim()],
+    const result = await pool.query<{ id: string }>(
+      `INSERT INTO website_inquiries
+        (inquiry_type, name, email, company, country, phone, whatsapp, company_interest,
+         product_interest, message, status, source_path)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, 'new', $11)
+       RETURNING id`,
+      [
+        inquiryType,
+        name,
+        email,
+        company || null,
+        country,
+        phone || null,
+        whatsapp || null,
+        companyInterest || null,
+        productInterest || null,
+        message,
+        sourcePath,
+      ],
     );
+    reference = `SWX-${String(result.rows[0].id).padStart(6, "0")}`;
   }
-  res.status(201).json({ ok: true });
+  res.status(201).json({ ok: true, reference });
 });
 
 if (isProduction) {
