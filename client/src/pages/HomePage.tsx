@@ -59,10 +59,7 @@ export function HomePage() {
           {content.capabilities.map((capability) => (
             <article className="capability-card" key={capability.title}>
               <span>{capability.eyebrow}</span>
-              <div>
-                <h3>{capability.title}</h3>
-                <p>{capability.description}</p>
-              </div>
+              <div><h3>{capability.title}</h3><p>{capability.description}</p></div>
             </article>
           ))}
         </div>
@@ -71,21 +68,14 @@ export function HomePage() {
 
       <section className="companies-preview section-pad" id="companies">
         <div className="section-heading-row">
-          <div>
-            <p className="eyebrow">Our companies</p>
-            <h2>{content.companiesTitle}</h2>
-          </div>
+          <div><p className="eyebrow">Our companies</p><h2>{content.companiesTitle}</h2></div>
           <p className="section-note">SAMWATEX is the parent group. Each operating company has its own role, expertise and identity within the portfolio.</p>
         </div>
         <div className="company-showcase">
           {content.companies.map((company, index) => (
             <article className="company-panel" key={company.name}>
               <div className="company-sequence">0{index + 1}</div>
-              <div>
-                <p className="eyebrow">{company.relationship}</p>
-                <h3>{company.name}</h3>
-                <p>{company.description}</p>
-              </div>
+              <div><p className="eyebrow">{company.relationship}</p><h3>{company.name}</h3><p>{company.description}</p></div>
               <Link className="company-coming company-profile-link" to={`/companies/${company.slug}`}>View profile ↗</Link>
             </article>
           ))}
@@ -115,28 +105,40 @@ export function HomePage() {
 
       <section className="markets-section section-pad">
         <div className="section-heading-row">
-          <div>
-            <p className="eyebrow">Global reach</p>
-            <h2>{content.marketsTitle}</h2>
+          <div><p className="eyebrow">Global reach</p><h2>{content.marketsTitle}</h2></div>
+          <div className="section-heading-actions">
+            <p className="section-note">Our presence is in Lebanon. Our export relationships extend into the markets we serve.</p>
+            <Link className="text-link" to="/global-reach">Explore our reach <span>↗</span></Link>
           </div>
-          <p className="section-note">Our presence is in Lebanon. Our export relationships extend into the markets we serve.</p>
         </div>
         <div className="market-grid">
           {content.markets.map((market, index) => (
             <article className="market-card" key={market.region}>
-              <span>0{index + 1}</span>
-              <h3>{market.region}</h3>
-              <p>{market.description}</p>
+              <span>0{index + 1}</span><h3>{market.region}</h3><p>{market.description}</p>
             </article>
           ))}
         </div>
       </section>
 
-      <section className="contact-band">
-        <div>
-          <p className="eyebrow light">Start a conversation</p>
-          <h2>Looking for a dependable trade or export partner?</h2>
+      <section className="home-gallery-preview section-pad section-dark">
+        <div className="section-heading-row">
+          <div><p className="eyebrow light">Gallery</p><h2>{content.galleryTitle}</h2></div>
+          <Link className="text-link light-link" to="/gallery">View gallery <span>↗</span></Link>
         </div>
+        <div className="home-gallery-grid">
+          {content.galleryItems.slice(0, 3).map((item, index) => (
+            <Link className={`home-gallery-card home-gallery-card-${index + 1}`} to="/gallery" key={item.id}>
+              <div className="home-gallery-visual" style={item.imageUrl ? { backgroundImage: `url(${item.imageUrl})` } : undefined}>
+                <span>SWX / 0{index + 1}</span>
+              </div>
+              <p>{item.category}</p><h3>{item.title}</h3>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="contact-band">
+        <div><p className="eyebrow light">Start a conversation</p><h2>Looking for a dependable trade or export partner?</h2></div>
         <div className="contact-band-actions">
           <a href={`mailto:${content.contactEmail}`}>{content.contactEmail}</a>
           <Link className="button light" to="/contact">Contact SAMWATEX</Link>
