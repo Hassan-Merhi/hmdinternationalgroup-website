@@ -86,8 +86,23 @@ export function HomePage() {
                 <h3>{company.name}</h3>
                 <p>{company.description}</p>
               </div>
-              <span className="company-coming">Profile in development</span>
+              <Link className="company-coming company-profile-link" to={`/companies/${company.slug}`}>View profile ↗</Link>
             </article>
+          ))}
+        </div>
+        <Link className="text-link companies-all-link" to="/companies">View all companies <span>↗</span></Link>
+      </section>
+
+      <section className="homepage-industries section-pad section-warm">
+        <div className="section-heading-row">
+          <div><p className="eyebrow">Industries & products</p><h2>{content.industriesTitle}</h2></div>
+          <Link className="text-link" to="/industries">Explore industries <span>↗</span></Link>
+        </div>
+        <div className="homepage-industry-grid">
+          {content.industries.slice(0, 4).map((industry) => (
+            <Link to={`/industries#${industry.slug}`} key={industry.slug}>
+              <span>{industry.eyebrow}</span><h3>{industry.title}</h3><p>{industry.description}</p><i>↗</i>
+            </Link>
           ))}
         </div>
       </section>
