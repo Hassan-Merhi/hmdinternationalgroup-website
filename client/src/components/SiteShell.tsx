@@ -3,6 +3,7 @@ import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
 import type { SiteContent } from "@shared/siteContent";
 import { defaultSiteContent } from "@shared/siteContent";
 import { getSiteContent } from "@client/lib/api";
+import { SeoManager } from "@client/components/SeoManager";
 
 const navItems = [
   ["/about", "About"],
@@ -12,25 +13,6 @@ const navItems = [
   ["/gallery", "Gallery"],
   ["/contact", "Contact"],
 ] as const;
-
-const pageNames: Record<string, string> = {
-  "/": "International Trade & Export Group",
-  "/about": "About",
-  "/about/story": "Our Story",
-  "/about/vision": "Vision & Mission",
-  "/companies": "Our Companies",
-  "/companies/hmd-international-group": "HMD International Group",
-  "/industries": "Industries & Products",
-  "/global-reach": "Global Reach",
-  "/gallery": "Gallery",
-  "/what-we-do": "What We Do",
-  "/contact": "Contact",
-};
-
-function setMeta(selector: string, value: string) {
-  const element = document.querySelector<HTMLMetaElement>(selector);
-  if (element) element.content = value;
-}
 
 export function SiteShell() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -59,18 +41,9 @@ export function SiteShell() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => {
-    const pageName = pageNames[location.pathname] || "SAMWATEX";
-    document.title = location.pathname === "/" ? content.seoTitle : `${pageName} — ${content.brandName}`;
-    setMeta('meta[name="description"]', content.seoDescription);
-    setMeta('meta[property="og:title"]', document.title);
-    setMeta('meta[property="og:description"]', content.seoDescription);
-    const socialImage = content.seoSocialImageUrl || content.heroImageUrl;
-    if (socialImage) setMeta('meta[property="og:image"]', new URL(socialImage, window.location.origin).toString());
-  }, [content, location.pathname]);
-
   return (
     <div className="site-shell">
+      <SeoManager content={content} />
       <div className="site-grain" aria-hidden="true" />
       <header className={`site-header ${scrolled ? "scrolled" : ""}`}>
         <Link to="/" className="brand" aria-label={`${content.brandName} home`}>
@@ -80,9 +53,7 @@ export function SiteShell() {
 
         <nav className={`main-nav ${menuOpen ? "open" : ""}`} aria-label="Primary navigation">
           {navItems.map(([to, label]) => (
-            <NavLink key={to} to={to}>
-              {label}
-            </NavLink>
+            <NavLink key={to} to={to}>{label}</NavLink>
           ))}
           <Link className="mobile-nav-contact" to="/contact">Start an enquiry ↗</Link>
         </nav>
