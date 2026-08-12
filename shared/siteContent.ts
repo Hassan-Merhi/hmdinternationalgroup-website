@@ -10,9 +10,30 @@ export type MarketItem = {
 };
 
 export type CompanyItem = {
+  slug: string;
   name: string;
+  shortName: string;
   relationship: string;
+  tagline: string;
   description: string;
+  overview: string;
+  focusAreas: string[];
+  markets: string[];
+};
+
+export type IndustryItem = {
+  slug: string;
+  eyebrow: string;
+  title: string;
+  description: string;
+  highlights: string[];
+  companySlugs: string[];
+};
+
+export type ProductCollection = {
+  title: string;
+  description: string;
+  examples: string[];
 };
 
 export type SiteContent = {
@@ -28,6 +49,9 @@ export type SiteContent = {
   capabilities: Capability[];
   companiesTitle: string;
   companies: CompanyItem[];
+  industriesTitle: string;
+  industries: IndustryItem[];
+  productCollections: ProductCollection[];
   marketsTitle: string;
   markets: MarketItem[];
   contactEmail: string;
@@ -72,10 +96,81 @@ export const defaultSiteContent: SiteContent = {
   companiesTitle: "One group. Distinct operating companies.",
   companies: [
     {
+      slug: "hmd-international-group",
       name: "HMD International Group",
+      shortName: "HMD",
       relationship: "A SAMWATEX Company",
+      tagline: "Commercial execution built close to the market.",
       description:
-        "An operating company within the SAMWATEX group, supporting the group’s commercial activities and market relationships.",
+        "An operating company within the SAMWATEX group focused on trading, product movement and dependable market supply.",
+      overview:
+        "HMD International Group operates within the SAMWATEX portfolio as a commercially focused company supporting sourcing, trading, distribution and market fulfilment. Its role is practical: connect supply with demand, coordinate movement and build dependable customer relationships across the markets it serves.",
+      focusAreas: [
+        "International trading and supply",
+        "Textiles, apparel and general merchandise",
+        "Distribution and market fulfilment",
+        "Commercial sourcing and partner coordination",
+      ],
+      markets: ["Africa", "Middle East", "Selected international markets"],
+    },
+  ],
+  industriesTitle: "Commercial focus across products, trade and distribution.",
+  industries: [
+    {
+      slug: "textiles-apparel",
+      eyebrow: "01",
+      title: "Textiles & Apparel",
+      description:
+        "A commercial category built around sourcing, trading and supplying textile and apparel products for market demand.",
+      highlights: ["Sourcing", "Trade coordination", "Market supply"],
+      companySlugs: ["hmd-international-group"],
+    },
+    {
+      slug: "general-merchandise",
+      eyebrow: "02",
+      title: "General Merchandise",
+      description:
+        "Flexible product sourcing and supply across selected commercial categories where dependable availability and execution matter.",
+      highlights: ["Multi-category sourcing", "Export coordination", "Commercial supply"],
+      companySlugs: ["hmd-international-group"],
+    },
+    {
+      slug: "international-trade",
+      eyebrow: "03",
+      title: "International Trade",
+      description:
+        "Cross-border commercial coordination connecting suppliers, customers and market opportunities from SAMWATEX's base in Lebanon.",
+      highlights: ["Export", "Supplier relationships", "Commercial coordination"],
+      companySlugs: ["hmd-international-group"],
+    },
+    {
+      slug: "distribution-fulfilment",
+      eyebrow: "04",
+      title: "Distribution & Fulfilment",
+      description:
+        "The operating discipline behind getting products from source to market with visibility, consistency and dependable execution.",
+      highlights: ["Distribution", "Inventory movement", "Market fulfilment"],
+      companySlugs: ["hmd-international-group"],
+    },
+  ],
+  productCollections: [
+    {
+      title: "Textile & apparel products",
+      description:
+        "A broad commercial portfolio serving textile and apparel demand, with exact product lines to be presented as the public catalog develops.",
+      examples: ["Apparel", "Textile goods", "Seasonal product lines"],
+    },
+    {
+      title: "General merchandise",
+      description:
+        "Selected consumer and commercial goods sourced according to market requirements and supply opportunities.",
+      examples: ["Consumer goods", "Commercial stock lines", "Market-specific assortments"],
+    },
+    {
+      title: "Commercial sourcing",
+      description:
+        "Partner-led sourcing for products and categories that fit customer demand, target markets and practical fulfilment requirements.",
+      examples: ["Supplier sourcing", "Product matching", "Export-ready supply"],
     },
   ],
   marketsTitle: "Lebanon based. Internationally connected.",
@@ -121,7 +216,13 @@ export function normalizeSiteContent(value: unknown): SiteContent {
       : Array.isArray(input.businesses)
         ? input.businesses
         : structuredClone(defaultSiteContent.capabilities),
-    companies: Array.isArray(input.companies) ? input.companies : structuredClone(defaultSiteContent.companies),
+    companies: Array.isArray(input.companies) && input.companies.every((company) => company && typeof company === "object" && "slug" in company)
+      ? input.companies
+      : structuredClone(defaultSiteContent.companies),
+    industries: Array.isArray(input.industries) ? input.industries : structuredClone(defaultSiteContent.industries),
+    productCollections: Array.isArray(input.productCollections)
+      ? input.productCollections
+      : structuredClone(defaultSiteContent.productCollections),
     markets: Array.isArray(input.markets) ? input.markets : structuredClone(defaultSiteContent.markets),
   };
 }
