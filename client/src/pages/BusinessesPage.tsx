@@ -12,8 +12,8 @@ export function BusinessesPage() {
     <div className="inner-page">
       <section className="page-hero alternate">
         <p className="eyebrow light">What we do</p>
-        <h1>Trade capability shaped around real market movement.</h1>
-        <p className="page-hero-copy">SAMWATEX operates from Lebanon with an outward-facing commercial model focused on sourcing, export and enduring distribution relationships.</p>
+        <h1>Sourcing, trading and export coordination from Lebanon.</h1>
+        <p className="page-hero-copy">We work from the commercial requirement backward: product, quantity, destination, timing and the supply needed to make it work.</p>
       </section>
       <section className="business-detail-list section-pad">
         {content.capabilities.map((capability) => (
@@ -24,8 +24,8 @@ export function BusinessesPage() {
         ))}
       </section>
       <section className="business-paths section-pad section-warm">
-        <Link to="/companies" className="business-path-card"><span>Companies</span><h3>Meet the operating companies behind the group.</h3><i>↗</i></Link>
-        <Link to="/industries" className="business-path-card dark-card"><span>Industries & products</span><h3>Explore the commercial categories SAMWATEX is building around.</h3><i>↗</i></Link>
+        <Link to="/companies" className="business-path-card"><span>Companies</span><h3>See how HMD International Group operates within SAMWATEX.</h3><i>↗</i></Link>
+        <Link to="/industries" className="business-path-card dark-card"><span>Products & categories</span><h3>See the commercial categories we source and supply.</h3><i>↗</i></Link>
       </section>
     </div>
   );
