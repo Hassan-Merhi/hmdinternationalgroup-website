@@ -79,6 +79,7 @@ declare module "express-session" {
     adminUsername?: string;
     adminRole?: string;
     adminSessionVersion?: number;
+    csrfToken?: string;
   }
 }
 
@@ -202,7 +203,7 @@ app.get("/sitemap.xml", async (_req, res) => {
       lastModified = result.rows[0].updated_at.toISOString().slice(0, 10);
     }
   }
-  const paths = ["/", "/about", "/about/story", "/about/vision", "/companies", ...content.companies.map((company) => `/companies/${company.slug}`), "/industries", "/global-reach", "/gallery", "/what-we-do", "/contact"];
+  const paths = ["/", "/about", "/what-we-do", "/products", "/process", ...content.companies.map((company) => `/companies/${company.slug}`), "/export-markets", "/sustainability", "/gallery", "/contact"];
   const urls = paths.map((route) => `  <url><loc>${escapeXml(`https://samwatex.com${route}`)}</loc><lastmod>${lastModified}</lastmod></url>`).join("\n");
   res.type("application/xml");
   res.setHeader("Cache-Control", "public, max-age=3600, stale-while-revalidate=86400");
@@ -501,8 +502,17 @@ if (isProduction) {
   const __dirname = path.dirname(fileURLToPath(import.meta.url));
   const publicDir = path.resolve(__dirname, "../../dist/public");
   const assetsDir = path.join(publicDir, "assets");
-  const knownRoute = /^(\/|\/about|\/about\/story|\/about\/vision|\/companies(?:\/[a-z0-9-]+)?|\/industries|\/global-reach|\/gallery|\/what-we-do|\/contact|\/admin)$/;
-  app.get("/businesses", (_req, res) => res.redirect(301, "/what-we-do"));
+  const knownRoute = /^(\/|\/about|\/what-we-do|\/products|\/process|\/companies\/[a-z0-9-]+|\/export-markets|\/sustainability|\/gallery|\/contact|\/admin)$/;
+  const legacyRedirects: Array<[string, string]> = [
+    ["/businesses", "/what-we-do"],
+    ["/industries", "/products"],
+    ["/global-reach", "/export-markets"],
+    ["/hmd", "/companies/hmd-international-group"],
+    ["/companies", "/companies/hmd-international-group"],
+    ["/about/story", "/about"],
+    ["/about/vision", "/about"],
+  ];
+  for (const [from, to] of legacyRedirects) app.get(from, (_req, res) => res.redirect(301, to));
   app.use("/assets", express.static(assetsDir, { maxAge: "1y", immutable: true }));
   app.use(express.static(publicDir, { maxAge: "1h", index: false, dotfiles: "deny" }));
   app.get("/{*path}", (req, res) => {
