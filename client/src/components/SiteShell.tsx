@@ -7,11 +7,12 @@ import { SeoManager } from "@client/components/SeoManager";
 
 const navItems = [
   ["/about", "About"],
-  ["/companies", "Companies"],
-  ["/industries", "Industries"],
-  ["/global-reach", "Global reach"],
+  ["/products", "Products"],
+  ["/process", "Process"],
+  ["/companies/hmd-international-group", "HMD"],
+  ["/export-markets", "Export"],
+  ["/sustainability", "Textile reuse"],
   ["/gallery", "Gallery"],
-  ["/contact", "Contact"],
 ] as const;
 
 export function SiteShell() {
@@ -41,8 +42,37 @@ export function SiteShell() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    const targets = Array.from(document.querySelectorAll<HTMLElement>(
+      "main .section-pad, main .contact-band, main .statement-section",
+    ));
+    if (!targets.length) return;
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    targets.forEach((target, index) => {
+      target.classList.add("phase9-reveal");
+      target.style.setProperty("--phase9-delay", `${Math.min(index, 5) * 35}ms`);
+    });
+
+    if (reducedMotion || !("IntersectionObserver" in window)) {
+      targets.forEach((target) => target.classList.add("phase9-visible"));
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        (entry.target as HTMLElement).classList.add("phase9-visible");
+        observer.unobserve(entry.target);
+      }
+    }, { threshold: 0.08, rootMargin: "0px 0px -7% 0px" });
+
+    targets.forEach((target) => observer.observe(target));
+    return () => observer.disconnect();
+  }, [location.pathname]);
+
   return (
-    <div className="site-shell">
+    <div className="site-shell textile-site-shell phase9-site">
       <SeoManager content={content} />
       <header className={`site-header ${scrolled ? "scrolled" : ""}`}>
         <Link to="/" className="brand" aria-label={`${content.brandName} home`}>
@@ -50,15 +80,15 @@ export function SiteShell() {
           <span className="brand-copy">{content.brandDescriptor}</span>
         </Link>
 
-        <nav className={`main-nav ${menuOpen ? "open" : ""}`} aria-label="Primary navigation">
+        <nav className={`main-nav textile-nav ${menuOpen ? "open" : ""}`} aria-label="Primary navigation">
           {navItems.map(([to, label]) => (
             <NavLink key={to} to={to}>{label}</NavLink>
           ))}
-          <Link className="mobile-nav-contact" to="/contact">Business enquiry ↗</Link>
+          <Link className="mobile-nav-contact" to="/contact">Wholesale enquiry ↗</Link>
         </nav>
 
         <div className="header-actions">
-          <Link className="header-cta" to="/contact">Enquire</Link>
+          <Link className="header-cta" to="/contact">Wholesale enquiry</Link>
           <button
             className={`menu-toggle ${menuOpen ? "active" : ""}`}
             type="button"
@@ -73,18 +103,20 @@ export function SiteShell() {
 
       <main><Outlet /></main>
 
-      <footer className="site-footer">
+      <footer className="site-footer textile-footer">
         <div className="footer-brand-block">
           <div className="footer-mark">{content.brandName}</div>
-          <p>Trade and export from Lebanon.</p>
+          <p>Used clothing · sorting · grading · wholesale export</p>
         </div>
         <div className="footer-links">
           <Link to="/about">About</Link>
-          <Link to="/companies">Companies</Link>
-          <Link to="/industries">Industries</Link>
-          <Link to="/global-reach">Global reach</Link>
-          <Link to="/gallery">Gallery</Link>
           <Link to="/what-we-do">What we do</Link>
+          <Link to="/products">Products</Link>
+          <Link to="/process">Process</Link>
+          <Link to="/companies/hmd-international-group">HMD</Link>
+          <Link to="/export-markets">Export & logistics</Link>
+          <Link to="/sustainability">Textile reuse</Link>
+          <Link to="/gallery">Gallery</Link>
           <Link to="/contact">Contact</Link>
           <a href={`mailto:${content.contactEmail}`}>{content.contactEmail}</a>
         </div>

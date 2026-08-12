@@ -1,0 +1,241 @@
+/* SAMWATEX textile reposition — phases 5-8 */
+
+.textile-nav { gap: clamp(14px, 1.65vw, 28px); }
+.textile-nav a { font-size: .69rem; letter-spacing: .075em; white-space: nowrap; }
+
+.hmd-profile-hero {
+  min-height: 82svh;
+  background:
+    radial-gradient(circle at 78% 42%, rgba(214,180,119,.18), transparent 24%),
+    linear-gradient(115deg, #09120f 0%, #102a21 58%, #17392e 100%);
+}
+
+.hmd-role-band { overflow: hidden; }
+.hmd-flow-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+.hmd-flow-grid article {
+  min-height: 300px;
+  padding: 32px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+}
+.hmd-flow-grid article > span,
+.logistics-detail-grid article > span,
+.gallery-guide-grid article > span,
+.sustainability-principle-grid article > span {
+  font-size: .68rem;
+  letter-spacing: .16em;
+  color: #7c847e;
+}
+.hmd-flow-grid h3,
+.logistics-detail-grid h3,
+.gallery-guide-grid h3,
+.sustainability-principle-grid h3 {
+  margin: auto 0 16px;
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(1.5rem, 2vw, 2.2rem);
+  font-weight: 400;
+  letter-spacing: -.035em;
+}
+.hmd-flow-grid p,
+.logistics-detail-grid p,
+.gallery-guide-grid p,
+.sustainability-principle-grid p {
+  margin: 0;
+  color: #626a64;
+}
+
+.hmd-buyer-grid {
+  display: grid;
+  grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+  gap: clamp(48px, 8vw, 120px);
+  align-items: start;
+}
+.hmd-buyer-copy > p {
+  margin: 0 0 34px;
+  color: #5d655f;
+  font-size: clamp(1rem, 1.25vw, 1.15rem);
+}
+.hmd-buyer-grid ul { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+.hmd-buyer-grid li {
+  padding: 24px 0;
+  border-bottom: 1px solid var(--line);
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(1.2rem, 1.8vw, 1.8rem);
+  letter-spacing: -.025em;
+}
+.hmd-buyer-grid li::before { content: "↗"; margin-right: 18px; color: #8a7351; }
+
+.hmd-category-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.hmd-category-grid article { min-height: 280px; }
+
+.export-step-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.export-step-grid article { min-height: 310px; }
+
+.logistics-detail-grid,
+.gallery-guide-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+.logistics-detail-grid article,
+.gallery-guide-grid article {
+  min-height: 280px;
+  padding: 30px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+}
+.export-enquiry-brief .button { margin-top: 18px; }
+
+.sustainability-hero {
+  background:
+    radial-gradient(circle at 72% 34%, rgba(214,180,119,.22), transparent 22%),
+    linear-gradient(125deg, #07100d 0%, #0f2a22 55%, #24503f 100%);
+}
+.sustainability-intro .editorial-copy p + p,
+.sustainability-boundary .editorial-copy p + p { margin-top: 20px; }
+.sustainability-principle-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 1px solid var(--line-light);
+  border-left: 1px solid var(--line-light);
+}
+.sustainability-principle-grid article {
+  min-height: 330px;
+  padding: clamp(30px, 4vw, 52px);
+  border-right: 1px solid var(--line-light);
+  border-bottom: 1px solid var(--line-light);
+  display: flex;
+  flex-direction: column;
+}
+.sustainability-principle-grid article > span { color: var(--sand); }
+.sustainability-principle-grid h3 { color: var(--white); }
+.sustainability-principle-grid p { color: rgba(255,255,255,.61); max-width: 560px; }
+
+.reuse-cycle-list { border-top: 1px solid var(--line); }
+.reuse-cycle-list article {
+  display: grid;
+  grid-template-columns: 90px minmax(0, 1fr);
+  gap: 30px;
+  padding: 32px 0;
+  border-bottom: 1px solid var(--line);
+}
+.reuse-cycle-list > article > span { color: #8c938d; font-size: .69rem; letter-spacing: .16em; }
+.reuse-cycle-list h3 {
+  margin: 0 0 9px;
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(1.55rem, 2.4vw, 2.6rem);
+  font-weight: 400;
+  letter-spacing: -.035em;
+}
+.reuse-cycle-list p { margin: 0; max-width: 760px; color: #606862; }
+.sustainability-boundary { background: #fffdf8; }
+
+.gallery-intro { background: #fffdf8; }
+.gallery-guide-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.gallery-guide-grid article { min-height: 240px; }
+
+.textile-gallery-page .gallery-toolbar { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 48px; }
+.textile-gallery-page .gallery-toolbar button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 42px;
+  padding: 0 15px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: .09em;
+  font-size: .66rem;
+}
+.textile-gallery-page .gallery-toolbar button span { opacity: .5; }
+.textile-gallery-page .gallery-toolbar button.active { background: var(--ink); color: var(--white); border-color: var(--ink); }
+
+.textile-gallery-grid .gallery-visual.is-placeholder {
+  min-height: 360px;
+  background:
+    linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px),
+    radial-gradient(circle at 72% 25%, #315847, #16382d 45%, #0c1d18 100%);
+  background-size: 42px 42px, 42px 42px, auto;
+}
+.gallery-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: rgba(255,255,255,.68);
+  text-align: center;
+}
+.gallery-placeholder strong {
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(2rem, 4vw, 4.5rem);
+  font-weight: 400;
+  letter-spacing: -.05em;
+}
+.gallery-placeholder span { text-transform: uppercase; letter-spacing: .18em; font-size: .62rem; opacity: .7; }
+.gallery-empty { padding: 40px 0 0; color: #687068; }
+.textile-gallery-story { grid-template-columns: minmax(0, 1.15fr) minmax(260px, .65fr) auto; align-items: end; }
+.textile-gallery-story h2 {
+  margin: 0;
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(2.4rem, 4vw, 4.6rem);
+  font-weight: 400;
+  letter-spacing: -.045em;
+  line-height: 1.02;
+}
+.textile-gallery-story > p { color: rgba(255,255,255,.6); max-width: 520px; }
+
+@media (max-width: 1280px) {
+  .textile-nav { gap: 14px; }
+  .textile-nav a { font-size: .62rem; }
+  .site-header { grid-template-columns: minmax(200px, .8fr) auto minmax(150px, .5fr); }
+  .hmd-flow-grid,
+  .logistics-detail-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .gallery-guide-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .textile-gallery-story { grid-template-columns: 1fr 1fr; }
+  .textile-gallery-story .button { justify-self: start; }
+}
+
+@media (max-width: 1040px) {
+  .site-header { grid-template-columns: 1fr auto; }
+  .textile-nav { gap: 0; }
+  .textile-nav a { font-size: .76rem; }
+  .hmd-category-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .export-step-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .gallery-guide-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .textile-gallery-story { grid-template-columns: 1fr; gap: 32px; }
+}
+
+@media (max-width: 760px) {
+  .hmd-flow-grid,
+  .logistics-detail-grid,
+  .gallery-guide-grid,
+  .sustainability-principle-grid,
+  .export-step-grid,
+  .hmd-category-grid { grid-template-columns: 1fr; }
+  .hmd-flow-grid article,
+  .logistics-detail-grid article,
+  .gallery-guide-grid article,
+  .sustainability-principle-grid article,
+  .export-step-grid article { min-height: 245px; }
+  .hmd-buyer-grid { grid-template-columns: 1fr; gap: 42px; }
+  .reuse-cycle-list article { grid-template-columns: 52px minmax(0, 1fr); gap: 16px; }
+  .textile-gallery-grid .gallery-visual.is-placeholder { min-height: 290px; }
+  .textile-gallery-page .gallery-toolbar { overflow-x: auto; flex-wrap: nowrap; padding-bottom: 8px; }
+  .textile-gallery-page .gallery-toolbar button { flex: 0 0 auto; }
+}

@@ -1,0 +1,893 @@
+/* SAMWATEX — Phase 9 premium editorial refinement */
+
+.phase9-site {
+  --phase9-ink: #0a110e;
+  --phase9-paper: #f4f0e7;
+  --phase9-cream: #fffdf8;
+  --phase9-gold: #d3b173;
+  --phase9-line: rgba(10, 17, 14, .14);
+  --phase9-line-light: rgba(255, 253, 248, .2);
+  --phase9-ease: cubic-bezier(.2, .75, .25, 1);
+}
+
+.phase9-site ::selection {
+  background: #d3b173;
+  color: #0a110e;
+}
+
+.phase9-site a:focus-visible,
+.phase9-site button:focus-visible,
+.phase9-site input:focus-visible,
+.phase9-site textarea:focus-visible,
+.phase9-site select:focus-visible {
+  outline: 2px solid var(--phase9-gold);
+  outline-offset: 4px;
+}
+
+.phase9-site .site-header {
+  position: fixed;
+  height: 92px;
+  transition: height .35s var(--phase9-ease), background .35s ease, border-color .35s ease, box-shadow .35s ease;
+}
+
+.phase9-site .site-header.scrolled {
+  height: 72px;
+  background: rgba(8, 17, 13, .88);
+  border-bottom-color: rgba(255, 255, 255, .13);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, .14);
+  backdrop-filter: blur(18px) saturate(120%);
+  -webkit-backdrop-filter: blur(18px) saturate(120%);
+}
+
+.phase9-site .brand {
+  gap: 12px;
+}
+
+.phase9-site .brand-mark {
+  letter-spacing: .22em;
+}
+
+.phase9-site .brand-copy {
+  max-width: 150px;
+  line-height: 1.25;
+}
+
+.phase9-site .textile-nav {
+  gap: clamp(13px, 1.5vw, 28px);
+}
+
+.phase9-site .textile-nav a {
+  font-size: .66rem;
+  letter-spacing: .09em;
+}
+
+.phase9-site .header-cta {
+  min-width: 144px;
+  text-align: center;
+  border-color: rgba(255, 255, 255, .3);
+  background: rgba(255, 255, 255, .04);
+}
+
+.phase9-site .header-cta:hover {
+  background: var(--phase9-gold);
+  border-color: var(--phase9-gold);
+  color: var(--phase9-ink);
+}
+
+.phase9-site .eyebrow {
+  font-size: .64rem;
+  letter-spacing: .24em;
+}
+
+.phase9-site .section-note,
+.phase9-site .intro-copy > p,
+.phase9-site .editorial-copy > p {
+  line-height: 1.72;
+}
+
+.phase9-site .section-heading-row {
+  grid-template-columns: minmax(0, 1.45fr) minmax(250px, .45fr);
+  gap: clamp(50px, 8vw, 140px);
+}
+
+.phase9-site .section-heading-row h2 {
+  max-width: 960px;
+}
+
+/* Hero: deliberately composed, not template-centered. */
+.phase9-home-hero {
+  min-height: max(760px, 100svh);
+}
+
+.phase9-home-hero .textile-hero-media.has-image .hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 42%;
+  filter: saturate(.78) contrast(1.04);
+  transform: scale(1.012);
+}
+
+.phase9-home-hero .textile-hero-grid {
+  opacity: .1;
+  background-size: min(14vw, 190px) min(14vw, 190px);
+}
+
+.phase9-home-hero .textile-hero-overlay {
+  background:
+    linear-gradient(90deg, rgba(3, 9, 7, .94) 0%, rgba(3, 9, 7, .68) 45%, rgba(3, 9, 7, .1) 78%),
+    linear-gradient(0deg, rgba(3, 9, 7, .9) 0%, rgba(3, 9, 7, .1) 48%, rgba(3, 9, 7, .3) 100%);
+}
+
+.phase9-home-hero .hero-content {
+  width: min(1100px, 82vw);
+  padding-bottom: clamp(145px, 17vh, 205px);
+}
+
+.phase9-home-hero .hero-content h1 {
+  max-width: 1050px;
+  font-size: clamp(3.8rem, 8.35vw, 9.2rem);
+  line-height: .91;
+  letter-spacing: -.066em;
+}
+
+.phase9-home-hero .hero-subtitle {
+  max-width: 650px;
+  margin-top: 32px;
+  color: rgba(255, 255, 255, .69);
+  font-size: clamp(.98rem, 1.25vw, 1.16rem);
+}
+
+.phase9-home-hero .hero-actions {
+  margin-top: 38px;
+}
+
+.phase9-home-hero .textile-side-note {
+  bottom: 158px;
+  width: 220px;
+}
+
+.phase9-hero-rail {
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  min-height: 76px;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  padding: 0 var(--page);
+  border-top: 1px solid rgba(255, 255, 255, .18);
+  background: rgba(3, 10, 8, .24);
+  backdrop-filter: blur(6px);
+}
+
+.phase9-hero-rail > span {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 clamp(10px, 1.5vw, 24px);
+  border-left: 1px solid rgba(255, 255, 255, .11);
+  color: rgba(255, 255, 255, .76);
+  font-size: .68rem;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+}
+
+.phase9-hero-rail > span:last-child {
+  border-right: 1px solid rgba(255, 255, 255, .11);
+}
+
+.phase9-hero-rail b {
+  color: var(--phase9-gold);
+  font-size: .6rem;
+  font-weight: 500;
+}
+
+/* Editorial intro: more whitespace, less dashboard rhythm. */
+.phase9-site .textile-intro {
+  grid-template-columns: minmax(120px, .28fr) minmax(0, 1fr);
+  gap: clamp(70px, 11vw, 190px);
+  padding-top: clamp(105px, 12vw, 190px);
+  padding-bottom: clamp(115px, 13vw, 210px);
+}
+
+.phase9-site .textile-intro .intro-copy {
+  max-width: 1050px;
+}
+
+.phase9-site .textile-intro .intro-copy h2 {
+  max-width: 980px;
+  font-size: clamp(3rem, 5.7vw, 6.8rem);
+  line-height: .96;
+  letter-spacing: -.058em;
+}
+
+.phase9-site .textile-intro .intro-copy > p {
+  max-width: 680px;
+  margin-top: 42px;
+}
+
+.phase9-site .textile-inline-links {
+  margin-top: 44px;
+  gap: 28px 46px;
+}
+
+.phase9-site .text-link {
+  transition: gap .25s var(--phase9-ease), opacity .25s ease;
+}
+
+.phase9-site .text-link:hover {
+  gap: 24px;
+  opacity: .72;
+}
+
+/* Capabilities become a ledger rather than a stack of cards. */
+.phase9-site .textile-capability-grid {
+  border-top-color: rgba(255, 255, 255, .25);
+}
+
+.phase9-site .textile-capability-grid .capability-card {
+  grid-template-columns: 70px minmax(0, 1fr);
+  padding: clamp(34px, 4vw, 58px) 0;
+  transition: padding-left .3s var(--phase9-ease), background .3s ease;
+}
+
+.phase9-site .textile-capability-grid .capability-card:hover {
+  padding-left: 18px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, .035), transparent 72%);
+}
+
+.phase9-site .textile-capability-grid .capability-card > div {
+  grid-template-columns: minmax(250px, .72fr) minmax(280px, 1fr);
+  gap: clamp(45px, 7vw, 110px);
+}
+
+/* Product catalogue mosaic — deliberately uneven. */
+.phase9-site .textile-category-grid {
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 1px;
+  border: 0;
+  background: var(--phase9-line);
+}
+
+.phase9-site .textile-category-card {
+  grid-column: span 6;
+  min-height: 380px;
+  border: 0;
+  background: var(--phase9-paper);
+  transition: background .35s ease, color .35s ease;
+}
+
+.phase9-site .textile-category-card:nth-child(1) { grid-column: span 7; min-height: 480px; }
+.phase9-site .textile-category-card:nth-child(2) { grid-column: span 5; min-height: 480px; }
+.phase9-site .textile-category-card:nth-child(3) { grid-column: span 4; min-height: 340px; }
+.phase9-site .textile-category-card:nth-child(4) { grid-column: span 8; min-height: 340px; }
+.phase9-site .textile-category-card:nth-child(5) { grid-column: span 7; min-height: 390px; }
+.phase9-site .textile-category-card:nth-child(6) { grid-column: span 5; min-height: 390px; }
+
+.phase9-site .textile-category-card:hover {
+  background: #fffdf8;
+}
+
+.phase9-site .textile-category-card h3 {
+  max-width: 520px;
+  font-size: clamp(2.15rem, 3.4vw, 4.3rem);
+  line-height: .95;
+}
+
+.phase9-site .textile-category-card p {
+  max-width: 520px;
+}
+
+.phase9-site .textile-category-card > i {
+  transition: transform .3s var(--phase9-ease);
+}
+
+.phase9-site .textile-category-card:hover > i {
+  transform: translate(4px, -4px);
+}
+
+/* Process is a sequence, not six same-size boxes. */
+.phase9-site .process-preview-grid {
+  display: block;
+  border: 0;
+}
+
+.phase9-site .process-preview-grid article {
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 72px minmax(170px, .42fr) minmax(0, 1fr);
+  align-items: baseline;
+  gap: clamp(26px, 5vw, 78px);
+  padding: 30px 0;
+  border: 0;
+  border-top: 1px solid var(--phase9-line);
+}
+
+.phase9-site .process-preview-grid article:last-child {
+  border-bottom: 1px solid var(--phase9-line);
+}
+
+.phase9-site .process-preview-grid h3 {
+  margin: 0;
+  font-size: clamp(1.8rem, 2.8vw, 3.4rem);
+}
+
+.phase9-site .process-preview-grid p {
+  max-width: 600px;
+  margin-left: auto;
+  font-size: .94rem;
+}
+
+.phase9-site .textile-hmd-band {
+  position: relative;
+  overflow: hidden;
+}
+
+.phase9-site .textile-hmd-band::after {
+  content: "HMD";
+  position: absolute;
+  right: -1vw;
+  bottom: -4vw;
+  color: rgba(255, 255, 255, .025);
+  font-family: "Manrope", sans-serif;
+  font-size: min(28vw, 420px);
+  font-weight: 600;
+  letter-spacing: -.08em;
+  line-height: .72;
+  pointer-events: none;
+}
+
+.phase9-site .textile-hmd-layout {
+  position: relative;
+  z-index: 1;
+  grid-template-columns: minmax(0, 1.2fr) minmax(300px, .52fr);
+}
+
+.phase9-site .textile-hmd-layout > div:last-child {
+  padding-left: clamp(30px, 5vw, 72px);
+  border-left: 1px solid rgba(255, 255, 255, .2);
+}
+
+.phase9-site .textile-statement {
+  min-height: 78vh;
+  background:
+    linear-gradient(120deg, rgba(6, 16, 12, .2), rgba(6, 16, 12, .8)),
+    radial-gradient(circle at 77% 32%, rgba(77, 126, 101, .44), transparent 24%),
+    #0b1c16;
+}
+
+.phase9-site .textile-statement h2 {
+  max-width: 1180px;
+  font-size: clamp(4rem, 8vw, 9rem);
+}
+
+/* Markets and operating chain: varied scale rather than KPI cards. */
+.phase9-site .textile-markets .market-grid {
+  grid-template-columns: 1.25fr .88fr .88fr;
+  border: 0;
+  gap: 1px;
+  background: var(--phase9-line);
+}
+
+.phase9-site .textile-markets .market-card {
+  min-height: 350px;
+  border: 0;
+  background: var(--phase9-paper);
+}
+
+.phase9-site .textile-markets .market-card:first-child {
+  min-height: 430px;
+  background: #fffdf8;
+}
+
+.phase9-site .textile-markets .market-card h3 {
+  font-size: clamp(2.2rem, 3.6vw, 4.6rem);
+}
+
+.phase9-site .textile-stats .home-stats-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  border-top: 1px solid var(--phase9-line);
+}
+
+.phase9-site .textile-stats .home-stats-grid article {
+  min-height: 250px;
+  padding: 28px 24px 10px 0;
+  border: 0;
+  border-right: 1px solid var(--phase9-line);
+  background: transparent;
+}
+
+.phase9-site .textile-stats .home-stats-grid article:last-child {
+  border-right: 0;
+}
+
+.phase9-site .textile-stats .home-stats-grid strong {
+  margin-top: auto;
+  font-size: clamp(2.1rem, 3vw, 3.6rem);
+}
+
+/* Gallery art direction. */
+.phase9-site .textile-gallery-preview .home-gallery-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.28fr) minmax(280px, .72fr);
+  grid-template-rows: repeat(2, minmax(260px, auto));
+  gap: 18px;
+}
+
+.phase9-site .textile-gallery-preview .home-gallery-card:first-child {
+  grid-row: 1 / span 2;
+}
+
+.phase9-site .textile-gallery-preview .home-gallery-card:first-child .home-gallery-visual {
+  min-height: 630px;
+}
+
+.phase9-site .textile-gallery-preview .home-gallery-card:not(:first-child) .home-gallery-visual {
+  min-height: 270px;
+}
+
+.phase9-site .textile-gallery-preview .home-gallery-visual {
+  overflow: hidden;
+}
+
+.phase9-site .textile-gallery-preview .home-gallery-visual img,
+.phase9-site .textile-gallery-grid .gallery-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .7s var(--phase9-ease), filter .5s ease;
+}
+
+.phase9-site .textile-gallery-preview .home-gallery-card:hover img,
+.phase9-site .textile-gallery-grid .gallery-card:hover img {
+  transform: scale(1.025);
+  filter: saturate(.88);
+}
+
+.phase9-site .textile-contact-band {
+  grid-template-columns: minmax(0, 1.35fr) minmax(260px, .42fr);
+  padding-top: clamp(90px, 10vw, 145px);
+  padding-bottom: clamp(90px, 10vw, 145px);
+}
+
+.phase9-site .textile-contact-band h2 {
+  max-width: 1040px;
+}
+
+/* Inner page heroes keep one visual language without identical compositions. */
+.phase9-site .page-hero,
+.phase9-site .company-profile-hero {
+  min-height: max(610px, 76svh);
+}
+
+.phase9-site .page-hero h1,
+.phase9-site .company-profile-hero h1 {
+  max-width: 1120px;
+  font-size: clamp(3.7rem, 7vw, 8.3rem);
+  line-height: .92;
+  letter-spacing: -.062em;
+}
+
+.phase9-site .page-hero-copy {
+  max-width: 650px;
+  font-size: clamp(1rem, 1.3vw, 1.18rem);
+}
+
+/* Product directory repeats the homepage's irregular logic. */
+.phase9-site .textile-product-directory-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 1px;
+  border: 0;
+  background: var(--phase9-line-light);
+}
+
+.phase9-site .textile-product-directory-grid .industry-directory-card {
+  grid-column: span 6;
+  min-height: 390px;
+  border: 0;
+}
+
+.phase9-site .textile-product-directory-grid .industry-directory-card:nth-child(1),
+.phase9-site .textile-product-directory-grid .industry-directory-card:nth-child(4) { grid-column: span 7; }
+.phase9-site .textile-product-directory-grid .industry-directory-card:nth-child(2),
+.phase9-site .textile-product-directory-grid .industry-directory-card:nth-child(3) { grid-column: span 5; }
+.phase9-site .textile-product-directory-grid .industry-directory-card:nth-child(5) { grid-column: span 8; }
+.phase9-site .textile-product-directory-grid .industry-directory-card:nth-child(6) { grid-column: span 4; }
+
+.phase9-site .textile-collection-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0;
+  border-top: 1px solid var(--phase9-line);
+}
+
+.phase9-site .textile-collection-grid > article {
+  min-height: 300px;
+  border: 0;
+  border-bottom: 1px solid var(--phase9-line);
+}
+
+.phase9-site .textile-collection-grid > article:nth-child(odd) {
+  border-right: 1px solid var(--phase9-line);
+}
+
+/* HMD / export / reuse: stagger selected blocks instead of repeating a component library. */
+.phase9-site .hmd-flow-grid,
+.phase9-site .logistics-detail-grid,
+.phase9-site .gallery-guide-grid,
+.phase9-site .sustainability-principle-grid {
+  border: 0;
+  gap: clamp(18px, 2vw, 30px);
+}
+
+.phase9-site .hmd-flow-grid article,
+.phase9-site .logistics-detail-grid article,
+.phase9-site .gallery-guide-grid article,
+.phase9-site .sustainability-principle-grid article {
+  border: 1px solid var(--phase9-line);
+  background: rgba(255, 253, 248, .34);
+}
+
+.phase9-site .hmd-flow-grid article:nth-child(even),
+.phase9-site .logistics-detail-grid article:nth-child(even) {
+  transform: translateY(42px);
+}
+
+.phase9-site .sustainability-principle-grid article {
+  border-color: rgba(255, 255, 255, .16);
+  background: rgba(255, 255, 255, .025);
+}
+
+.phase9-site .reuse-cycle-list article {
+  grid-template-columns: 72px minmax(220px, .45fr) minmax(0, 1fr);
+  align-items: baseline;
+  gap: clamp(26px, 5vw, 78px);
+}
+
+.phase9-site .reuse-cycle-list h3 {
+  margin: 0;
+}
+
+.phase9-site .reuse-cycle-list p {
+  margin-left: auto;
+}
+
+/* Full gallery: asymmetric image wall once real photography arrives. */
+.phase9-site .textile-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: clamp(18px, 2.4vw, 34px);
+}
+
+.phase9-site .textile-gallery-grid .gallery-card {
+  grid-column: span 6;
+}
+
+.phase9-site .textile-gallery-grid .gallery-card:nth-child(5n + 1) { grid-column: span 7; }
+.phase9-site .textile-gallery-grid .gallery-card:nth-child(5n + 2) { grid-column: span 5; }
+.phase9-site .textile-gallery-grid .gallery-card:nth-child(5n + 3) { grid-column: span 4; }
+.phase9-site .textile-gallery-grid .gallery-card:nth-child(5n + 4) { grid-column: span 8; }
+
+.phase9-site .textile-gallery-grid .gallery-card:nth-child(5n + 1) .gallery-visual { min-height: 560px; }
+.phase9-site .textile-gallery-grid .gallery-card:nth-child(5n + 2) .gallery-visual { min-height: 440px; }
+.phase9-site .textile-gallery-grid .gallery-card:nth-child(5n + 3) .gallery-visual { min-height: 350px; }
+.phase9-site .textile-gallery-grid .gallery-card:nth-child(5n + 4) .gallery-visual { min-height: 470px; }
+
+.phase9-site .gallery-card-copy {
+  padding-top: 20px;
+}
+
+.phase9-site .gallery-card-copy h2 {
+  max-width: 650px;
+}
+
+/* Reveal content without fading section backgrounds. */
+.phase9-site .phase9-reveal > * {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity .72s var(--phase9-ease), transform .72s var(--phase9-ease);
+  transition-delay: var(--phase9-delay, 0ms);
+}
+
+.phase9-site .phase9-reveal.phase9-visible > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Direction-aware foundation for future Arabic content. */
+[dir="rtl"] .phase9-site .textile-hmd-layout > div:last-child {
+  padding-left: 0;
+  padding-right: clamp(30px, 5vw, 72px);
+  border-left: 0;
+  border-right: 1px solid rgba(255, 255, 255, .2);
+}
+
+[dir="rtl"] .phase9-site .hmd-buyer-grid li::before {
+  margin-right: 0;
+  margin-left: 18px;
+}
+
+@media (max-width: 1280px) {
+  .phase9-site .site-header {
+    grid-template-columns: minmax(190px, .72fr) auto minmax(145px, .48fr);
+  }
+
+  .phase9-site .textile-nav {
+    gap: 12px;
+  }
+
+  .phase9-site .textile-nav a {
+    font-size: .6rem;
+  }
+
+  .phase9-site .header-cta {
+    min-width: 126px;
+    padding-inline: 13px;
+    font-size: .66rem;
+  }
+
+  .phase9-site .textile-category-card:nth-child(n),
+  .phase9-site .textile-product-directory-grid .industry-directory-card:nth-child(n) {
+    grid-column: span 6;
+  }
+
+  .phase9-site .textile-category-card:nth-child(1),
+  .phase9-site .textile-category-card:nth-child(2) {
+    min-height: 430px;
+  }
+}
+
+@media (max-width: 1040px) {
+  .phase9-site .site-header {
+    grid-template-columns: 1fr auto;
+    height: 78px;
+  }
+
+  .phase9-site .site-header.scrolled {
+    height: 68px;
+  }
+
+  .phase9-site .phase9-hero-rail {
+    padding-inline: 20px;
+  }
+
+  .phase9-site .phase9-hero-rail > span {
+    justify-content: center;
+    padding-inline: 8px;
+  }
+
+  .phase9-site .textile-intro {
+    grid-template-columns: 1fr;
+    gap: 38px;
+  }
+
+  .phase9-site .textile-capability-grid .capability-card > div {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .phase9-site .process-preview-grid article {
+    grid-template-columns: 54px minmax(150px, .4fr) minmax(0, 1fr);
+  }
+
+  .phase9-site .textile-hmd-layout,
+  .phase9-site .textile-contact-band {
+    grid-template-columns: 1fr;
+  }
+
+  .phase9-site .textile-hmd-layout > div:last-child {
+    padding: 38px 0 0;
+    border-left: 0;
+    border-top: 1px solid rgba(255, 255, 255, .2);
+  }
+
+  .phase9-site .textile-markets .market-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .phase9-site .textile-markets .market-card:first-child {
+    grid-column: 1 / -1;
+  }
+
+  .phase9-site .textile-stats .home-stats-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .phase9-site .textile-gallery-preview .home-gallery-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+  }
+
+  .phase9-site .textile-gallery-preview .home-gallery-card:first-child {
+    grid-column: 1 / -1;
+    grid-row: auto;
+  }
+
+  .phase9-site .textile-gallery-preview .home-gallery-card:first-child .home-gallery-visual {
+    min-height: 520px;
+  }
+
+  .phase9-site .hmd-flow-grid article:nth-child(even),
+  .phase9-site .logistics-detail-grid article:nth-child(even) {
+    transform: none;
+  }
+
+  .phase9-site .reuse-cycle-list article {
+    grid-template-columns: 54px minmax(0, 1fr);
+  }
+
+  .phase9-site .reuse-cycle-list p {
+    grid-column: 2;
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 760px) {
+  .phase9-site .site-header {
+    padding-inline: 18px;
+  }
+
+  .phase9-site .brand-copy,
+  .phase9-site .header-cta {
+    display: none;
+  }
+
+  .phase9-site .main-nav.open {
+    padding-top: 105px;
+  }
+
+  .phase9-site .main-nav.open a {
+    font-family: "Manrope", sans-serif;
+    font-size: clamp(1.8rem, 8vw, 2.8rem);
+    font-weight: 400;
+    letter-spacing: -.035em;
+    text-transform: none;
+  }
+
+  .phase9-site .main-nav.open .mobile-nav-contact {
+    margin-top: 20px;
+    font-family: "DM Sans", sans-serif;
+    font-size: .76rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+
+  .phase9-home-hero .hero-content {
+    width: 100%;
+    padding-inline: 20px;
+    padding-bottom: 128px;
+  }
+
+  .phase9-home-hero .hero-content h1 {
+    font-size: clamp(3.25rem, 15.8vw, 5.2rem);
+    line-height: .92;
+  }
+
+  .phase9-home-hero .hero-subtitle {
+    max-width: 92%;
+  }
+
+  .phase9-hero-rail {
+    min-height: 66px;
+    padding: 0;
+  }
+
+  .phase9-hero-rail > span {
+    gap: 5px;
+    flex-direction: column;
+    justify-content: center;
+    font-size: .52rem;
+    letter-spacing: .09em;
+  }
+
+  .phase9-site .section-heading-row {
+    gap: 28px;
+  }
+
+  .phase9-site .textile-category-grid,
+  .phase9-site .textile-product-directory-grid {
+    display: block;
+    background: transparent;
+  }
+
+  .phase9-site .textile-category-card,
+  .phase9-site .textile-category-card:nth-child(n),
+  .phase9-site .textile-product-directory-grid .industry-directory-card:nth-child(n) {
+    min-height: 300px;
+    margin-top: -1px;
+    border: 1px solid var(--phase9-line);
+  }
+
+  .phase9-site .textile-category-card h3 {
+    font-size: clamp(2.1rem, 10vw, 3.4rem);
+  }
+
+  .phase9-site .process-preview-grid article {
+    grid-template-columns: 42px 1fr;
+    gap: 12px 18px;
+    padding: 25px 0;
+  }
+
+  .phase9-site .process-preview-grid p {
+    grid-column: 2;
+    margin-left: 0;
+  }
+
+  .phase9-site .textile-markets .market-grid,
+  .phase9-site .textile-stats .home-stats-grid,
+  .phase9-site .textile-gallery-preview .home-gallery-grid,
+  .phase9-site .textile-collection-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .phase9-site .textile-markets .market-card:first-child,
+  .phase9-site .textile-gallery-preview .home-gallery-card:first-child {
+    grid-column: auto;
+  }
+
+  .phase9-site .textile-markets .market-card,
+  .phase9-site .textile-markets .market-card:first-child {
+    min-height: 290px;
+  }
+
+  .phase9-site .textile-stats .home-stats-grid article {
+    min-height: 190px;
+    border-right: 0;
+    border-bottom: 1px solid var(--phase9-line);
+  }
+
+  .phase9-site .textile-gallery-preview .home-gallery-card:first-child .home-gallery-visual,
+  .phase9-site .textile-gallery-preview .home-gallery-card:not(:first-child) .home-gallery-visual {
+    min-height: 320px;
+  }
+
+  .phase9-site .textile-collection-grid > article:nth-child(odd) {
+    border-right: 0;
+  }
+
+  .phase9-site .page-hero,
+  .phase9-site .company-profile-hero {
+    min-height: max(560px, 72svh);
+  }
+
+  .phase9-site .page-hero h1,
+  .phase9-site .company-profile-hero h1 {
+    font-size: clamp(3.1rem, 14vw, 5rem);
+  }
+
+  .phase9-site .textile-gallery-grid {
+    display: block;
+  }
+
+  .phase9-site .textile-gallery-grid .gallery-card {
+    margin-bottom: 48px;
+  }
+
+  .phase9-site .textile-gallery-grid .gallery-card:nth-child(n) .gallery-visual {
+    min-height: 315px;
+  }
+
+  [dir="rtl"] .phase9-site .textile-hmd-layout > div:last-child {
+    padding: 38px 0 0;
+    border-right: 0;
+    border-top: 1px solid rgba(255, 255, 255, .2);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .phase9-site *,
+  .phase9-site *::before,
+  .phase9-site *::after {
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+
+  .phase9-site .phase9-reveal > * {
+    opacity: 1;
+    transform: none;
+  }
+}

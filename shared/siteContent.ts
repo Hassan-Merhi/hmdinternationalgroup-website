@@ -84,199 +84,263 @@ export type SiteContent = {
 
 export const defaultSiteContent: SiteContent = {
   brandName: "SAMWATEX",
-  brandDescriptor: "International Group",
-  heroEyebrow: "Beirut, Lebanon · Trade & Export",
-  heroTitle: "Trade from Lebanon, built around the market.",
+  brandDescriptor: "Textile Recovery & Export",
+  heroEyebrow: "Lebanon · Sorting, grading & export",
+  heroTitle: "Used clothing, prepared for the markets that need it.",
   heroSubtitle:
-    "SAMWATEX works with suppliers, customers and distributors to source products, coordinate exports and support market supply across Africa, the Middle East and selected international markets.",
+    "SAMWATEX sorts, grades, prepares and exports reusable clothing, footwear and textile goods from Lebanon for wholesale customers across Africa and the Middle East.",
   heroImageUrl: "",
-  aboutTitle: "A commercial group with Lebanon at the center.",
+  aboutTitle: "Giving reusable textiles a second commercial life.",
   aboutBody:
-    "SAMWATEX operates from Lebanon through close supplier and customer relationships. We source, trade and coordinate export supply for markets where consistency, speed and practical execution matter.",
-  capabilitiesTitle: "From requirement to market supply.",
+    "From our Lebanon base, SAMWATEX turns mixed used-clothing supply into clear, market-ready wholesale assortments. Our work brings sorting, grading, quality control, baling and export coordination together so buyers receive goods prepared for the realities of their destination market.",
+  capabilitiesTitle: "From mixed textile supply to export-ready bales.",
   capabilities: [
     {
       eyebrow: "01",
-      title: "International Trade & Export",
+      title: "Intake & Preparation",
       description:
-        "We coordinate commercial requirements, supply and export movement from Lebanon into the markets we serve.",
+        "Incoming used clothing and textile goods are received, opened and prepared for systematic sorting and evaluation.",
     },
     {
       eyebrow: "02",
-      title: "Sourcing & Supply",
+      title: "Sorting",
       description:
-        "We work with suppliers to match products, quantities and timing to customer requirements and market demand.",
+        "Items are separated by category, season, garment type and practical market relevance before grading begins.",
     },
     {
       eyebrow: "03",
-      title: "Distribution Partnerships",
+      title: "Grading & Quality Control",
       description:
-        "We build market relationships with customers and distributors who need dependable continuity of supply.",
+        "Goods are assessed by condition and quality so wholesale assortments can be built around clear buyer expectations.",
+    },
+    {
+      eyebrow: "04",
+      title: "Baling & Preparation",
+      description:
+        "Finished assortments are compressed, identified and prepared for efficient warehouse handling and container loading.",
+    },
+    {
+      eyebrow: "05",
+      title: "Wholesale Export",
+      description:
+        "Orders are coordinated from Lebanon for shipment to wholesale customers across Africa, the Middle East and selected markets.",
     },
   ],
-  companiesTitle: "HMD International Group, under SAMWATEX.",
+  companiesTitle: "HMD International Group operates under SAMWATEX.",
   companies: [
     {
       slug: "hmd-international-group",
       name: "HMD International Group",
       shortName: "HMD",
       relationship: "A SAMWATEX Company",
-      tagline: "Trading, sourcing and market supply.",
+      tagline: "Textile trading, market supply and export execution.",
       description:
-        "HMD International Group is the operating company within SAMWATEX focused on trading, product sourcing, distribution and market fulfilment.",
+        "HMD International Group is the operating company within SAMWATEX focused on used-clothing trade, wholesale customer supply and export-market execution.",
       overview:
-        "HMD International Group operates within SAMWATEX as the market-facing trading company. It works across sourcing, product supply, distribution and export coordination, with a focus on practical execution and long-term customer relationships.",
+        "HMD International Group operates within SAMWATEX as the market-facing commercial company. It connects the group's sorting and product preparation capabilities with wholesale buyers, destination-market requirements and export execution.",
       focusAreas: [
-        "International trading and supply",
-        "Textiles, apparel and general merchandise",
-        "Distribution and market fulfilment",
-        "Commercial sourcing and partner coordination",
+        "Used clothing and textile wholesale",
+        "Buyer-specific assortments and market supply",
+        "Commercial trading and customer relationships",
+        "Export coordination from Lebanon",
       ],
       markets: ["Africa", "Middle East", "Selected international markets"],
     },
   ],
-  industriesTitle: "Products and commercial categories we work with.",
+  industriesTitle: "Wholesale categories built around buyer demand.",
   industries: [
     {
-      slug: "textiles-apparel",
+      slug: "mens-clothing",
       eyebrow: "01",
-      title: "Textiles & Apparel",
+      title: "Men's Clothing",
       description:
-        "Sourcing and supply across textile and apparel categories according to customer requirements and market demand.",
-      highlights: ["Sourcing", "Trade coordination", "Market supply"],
+        "Wholesale assortments across everyday, seasonal and outerwear categories prepared to buyer and destination requirements.",
+      highlights: ["Shirts & tops", "Trousers & denim", "Jackets & outerwear"],
       companySlugs: ["hmd-international-group"],
     },
     {
-      slug: "general-merchandise",
+      slug: "womens-clothing",
       eyebrow: "02",
-      title: "General Merchandise",
+      title: "Women's Clothing",
       description:
-        "Selected consumer and commercial product lines sourced and supplied around availability, specification and target-market needs.",
-      highlights: ["Multi-category sourcing", "Export coordination", "Commercial supply"],
+        "Mixed and category-led women's apparel sorted for condition, seasonality and the preferences of the destination market.",
+      highlights: ["Dresses & skirts", "Tops & blouses", "Trousers & outerwear"],
       companySlugs: ["hmd-international-group"],
     },
     {
-      slug: "international-trade",
+      slug: "childrens-clothing",
       eyebrow: "03",
-      title: "International Trade",
+      title: "Children's Clothing",
       description:
-        "Commercial coordination between suppliers, customers and export markets from SAMWATEX's operating base in Lebanon.",
-      highlights: ["Export", "Supplier relationships", "Commercial coordination"],
+        "Children's garments prepared by useful category and season, with assortments designed for wholesale resale markets.",
+      highlights: ["Boys", "Girls", "Seasonal mixes"],
       companySlugs: ["hmd-international-group"],
     },
     {
-      slug: "distribution-fulfilment",
+      slug: "shoes-footwear",
       eyebrow: "04",
-      title: "Distribution & Fulfilment",
+      title: "Shoes & Footwear",
       description:
-        "Coordination of supply and market fulfilment so products move from source to customer with clear commercial accountability.",
-      highlights: ["Distribution", "Inventory movement", "Market fulfilment"],
+        "Used footwear separated by type and condition for wholesale assortments and destination-market demand.",
+      highlights: ["Men", "Women", "Children"],
+      companySlugs: ["hmd-international-group"],
+    },
+    {
+      slug: "bags-accessories",
+      eyebrow: "05",
+      title: "Bags & Accessories",
+      description:
+        "Selected accessories and bags prepared as standalone or complementary wholesale categories.",
+      highlights: ["Handbags", "Backpacks", "Belts & accessories"],
+      companySlugs: ["hmd-international-group"],
+    },
+    {
+      slug: "household-textiles",
+      eyebrow: "06",
+      title: "Household Textiles",
+      description:
+        "Reusable household textile lines sorted and prepared according to available supply and buyer requirements.",
+      highlights: ["Bed linen", "Blankets", "Towels & household mixes"],
       companySlugs: ["hmd-international-group"],
     },
   ],
   productCollections: [
     {
-      title: "Textile & apparel products",
+      title: "Men's assortments",
       description:
-        "Textile and apparel supply selected around customer specifications, seasonality, destination market and available sourcing.",
-      examples: ["Apparel", "Textile goods", "Seasonal product lines"],
+        "Men's used clothing prepared by garment family, season and condition for wholesale markets.",
+      examples: ["Shirts & T-shirts", "Jeans & trousers", "Jackets & coats", "Sportswear"],
     },
     {
-      title: "General merchandise",
+      title: "Women's assortments",
       description:
-        "Consumer and commercial goods sourced according to market requirements, supplier availability and shipment economics.",
-      examples: ["Consumer goods", "Commercial stock lines", "Market-specific assortments"],
+        "Women's apparel sorted into useful wholesale groupings instead of undifferentiated mixed stock.",
+      examples: ["Dresses", "Blouses & tops", "Skirts & trousers", "Jackets & outerwear"],
     },
     {
-      title: "Commercial sourcing",
+      title: "Children's assortments",
       description:
-        "Product sourcing matched to customer demand, destination-market requirements and practical fulfilment conditions.",
-      examples: ["Supplier sourcing", "Product matching", "Export-ready supply"],
+        "Children's clothing prepared by practical age, season and category combinations for resale markets.",
+      examples: ["Boys' clothing", "Girls' clothing", "Summer mixes", "Winter mixes"],
+    },
+    {
+      title: "Shoes & footwear",
+      description:
+        "Used footwear separated by wearer, type and usable condition for wholesale supply.",
+      examples: ["Men's shoes", "Women's shoes", "Children's shoes", "Sport & casual footwear"],
+    },
+    {
+      title: "Bags & accessories",
+      description:
+        "Accessory categories selected from available supply and prepared for market-specific wholesale demand.",
+      examples: ["Handbags", "School bags", "Belts", "Wallets & mixed accessories"],
+    },
+    {
+      title: "Household textiles",
+      description:
+        "Reusable household textile goods prepared as separate categories where supply and quality allow.",
+      examples: ["Bed linen", "Blankets", "Towels", "Household textile mixes"],
+    },
+    {
+      title: "Buyer-specific mixes",
+      description:
+        "Mixed bales and tailored assortments can be discussed around destination, season, category preference and available supply.",
+      examples: ["Summer mixes", "Winter mixes", "Category mixes", "Market-specific assortments"],
     },
   ],
-  marketsTitle: "From Lebanon to the markets we serve.",
+  marketsTitle: "Wholesale textile exports from Lebanon.",
   markets: [
     {
       region: "Africa",
-      description: "Export relationships and customer supply across selected African markets.",
+      description: "Core wholesale export relationships across selected African markets, served from Lebanon.",
     },
     {
       region: "Middle East",
-      description: "Regional trade and supply coordinated from Lebanon.",
+      description: "Regional used-clothing and textile trade coordinated through SAMWATEX and HMD.",
     },
     {
-      region: "International Markets",
-      description: "Selected opportunities outside the core regions where the product, partner and commercial terms make sense.",
+      region: "Selected Markets",
+      description: "Additional destinations considered where product mix, demand and commercial terms align.",
     },
   ],
-  galleryTitle: "Products, operations and the work behind the group.",
+  galleryTitle: "Inside the operation.",
   galleryItems: [
     {
-      id: "samwatex-group",
-      category: "SAMWATEX",
+      id: "sorting-floor",
+      category: "Sorting",
       company: "SAMWATEX",
-      title: "The group from Lebanon.",
-      description: "SAMWATEX coordinates its commercial activity and export relationships from Lebanon.",
+      title: "Category separation on the sorting floor.",
+      description: "Mixed textile supply is separated into useful garment, footwear and household categories before wholesale assortments are built.",
       imageUrl: "",
     },
     {
-      id: "hmd-operating-company",
+      id: "product-assortments",
+      category: "Products",
+      company: "HMD International Group",
+      title: "Wholesale product assortments.",
+      description: "Men's, women's, children's, footwear, bags and textile goods prepared around condition, season and buyer demand.",
+      imageUrl: "",
+    },
+    {
+      id: "finished-bales",
+      category: "Bales",
+      company: "SAMWATEX",
+      title: "Finished bales ready for staging.",
+      description: "Confirmed assortments are compressed and identified for efficient handling before container loading.",
+      imageUrl: "",
+    },
+    {
+      id: "container-loading",
+      category: "Loading",
+      company: "SAMWATEX",
+      title: "Container preparation and loading.",
+      description: "Finished orders are organized for warehouse movement, loading and export coordination from Lebanon.",
+      imageUrl: "",
+    },
+    {
+      id: "hmd-commercial",
       category: "HMD",
       company: "HMD International Group",
-      title: "HMD International Group.",
-      description: "The operating company focused on trading, sourcing, distribution and market supply.",
+      title: "Buyer-facing commercial execution.",
+      description: "HMD connects buyer requirements with available sorted product, order preparation and export-market coordination.",
       imageUrl: "",
     },
     {
-      id: "international-movement",
-      category: "Trade & Export",
+      id: "samwatex-facility",
+      category: "Facility",
       company: "SAMWATEX",
-      title: "International movement.",
-      description: "Export coordination linking product requirements, supply and destination markets.",
-      imageUrl: "",
-    },
-    {
-      id: "textile-apparel",
-      category: "Products",
-      company: "HMD International Group",
-      title: "Textiles and apparel.",
-      description: "Commercial textile and apparel categories sourced around market requirements.",
-      imageUrl: "",
-    },
-    {
-      id: "general-merchandise",
-      category: "Products",
-      company: "HMD International Group",
-      title: "General merchandise.",
-      description: "Selected product lines sourced and supplied according to customer and market needs.",
-      imageUrl: "",
-    },
-    {
-      id: "partner-coordination",
-      category: "Operations",
-      company: "SAMWATEX",
-      title: "Supplier and customer coordination.",
-      description: "The commercial relationships that keep sourcing, supply and export execution moving.",
+      title: "The physical operation behind the brand.",
+      description: "Warehouse, working areas and equipment form the operating base from which SAMWATEX prepares wholesale textile supply.",
       imageUrl: "",
     },
   ],
-  statsTitle: "The group in four lines.",
+  statsTitle: "One operation, five connected steps.",
   stats: [
-    { value: "Lebanon", label: "Operating base" },
-    { value: "Africa", label: "Core export region" },
-    { value: "Middle East", label: "Regional market" },
-    { value: "HMD", label: "Operating company" },
+    { value: "Sort", label: "Separate by useful category" },
+    { value: "Grade", label: "Evaluate condition and quality" },
+    { value: "Build", label: "Prepare buyer-ready assortments" },
+    { value: "Bale", label: "Compress and identify shipments" },
+    { value: "Export", label: "Move wholesale orders from Lebanon" },
   ],
   contactEmail: "sales@samwatex.com",
   contactPhone: "+96181333194",
   whatsappPhone: "",
   contactAddress: "Beirut Port Free Zone, Ezzeldine Building, Floor (-1), Hadath San Therez, Baabda, Lebanon",
   footerText: "SAMWATEX. All rights reserved.",
-  seoTitle: "SAMWATEX — International Trade & Export Group",
+  seoTitle: "SAMWATEX — Used Clothing Sorting, Grading & Export",
   seoDescription:
-    "SAMWATEX is a Lebanon-based group working across sourcing, trade and export supply for markets in Africa, the Middle East and selected international destinations.",
+    "SAMWATEX is a Lebanon-based used-clothing and textile business focused on sorting, grading, baling and wholesale export to markets across Africa and the Middle East.",
   seoSocialImageUrl: "",
 };
+
+function preserveMedia(defaultItems: GalleryItem[], incoming: GalleryItem[] | undefined) {
+  if (!Array.isArray(incoming)) return defaultItems;
+  const mediaById = new Map(incoming.map((item) => [item.id, item.imageUrl]));
+  return defaultItems.map((item, index) => ({
+    ...item,
+    imageUrl: mediaById.get(item.id) || incoming[index]?.imageUrl || item.imageUrl,
+  }));
+}
 
 export function normalizeSiteContent(value: unknown): SiteContent {
   if (!value || typeof value !== "object") return structuredClone(defaultSiteContent);
@@ -287,6 +351,23 @@ export function normalizeSiteContent(value: unknown): SiteContent {
       ...structuredClone(defaultSiteContent),
       heroImageUrl: typeof input.heroImageUrl === "string" ? input.heroImageUrl : "",
     };
+  }
+
+  const previousGenericSamwatex =
+    input.heroTitle === "Trade from Lebanon, built around the market."
+    || input.capabilities?.some((capability) => capability?.title === "International Trade & Export")
+    || input.industries?.some((industry) => industry?.slug === "general-merchandise");
+
+  if (previousGenericSamwatex) {
+    const migrated = structuredClone(defaultSiteContent);
+    if (typeof input.heroImageUrl === "string") migrated.heroImageUrl = input.heroImageUrl;
+    if (typeof input.seoSocialImageUrl === "string") migrated.seoSocialImageUrl = input.seoSocialImageUrl;
+    if (typeof input.contactEmail === "string") migrated.contactEmail = input.contactEmail;
+    if (typeof input.contactPhone === "string") migrated.contactPhone = input.contactPhone;
+    if (typeof input.whatsappPhone === "string") migrated.whatsappPhone = input.whatsappPhone;
+    if (typeof input.contactAddress === "string") migrated.contactAddress = input.contactAddress;
+    migrated.galleryItems = preserveMedia(migrated.galleryItems, input.galleryItems);
+    return migrated;
   }
 
   return {

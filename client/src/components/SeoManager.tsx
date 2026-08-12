@@ -33,24 +33,55 @@ function pageSeo(pathname: string, content: SiteContent) {
   const company = companySlug ? content.companies.find((item) => item.slug === companySlug) : undefined;
   if (company) {
     return {
-      title: `${company.name} — A ${content.brandName} Company`,
+      title: `${company.name} — Wholesale Used Clothing | ${content.brandName}`,
       description: company.description,
       known: true,
-      crumbs: ["Companies", company.name],
+      crumbs: ["HMD International Group"],
     };
   }
 
   const routes: Record<string, { title: string; description: string; crumbs?: string[] }> = {
     "/": { title: content.seoTitle, description: content.seoDescription },
-    "/about": { title: `About ${content.brandName} — Lebanon-Based International Group`, description: content.aboutBody, crumbs: ["About"] },
-    "/about/story": { title: `Our Story — ${content.brandName}`, description: "Discover the story and group structure behind SAMWATEX, a Lebanon-based international trade and export group.", crumbs: ["About", "Our Story"] },
-    "/about/vision": { title: `Vision & Mission — ${content.brandName}`, description: "SAMWATEX's vision, mission and values for long-term international trade, sourcing and export relationships.", crumbs: ["About", "Vision & Mission"] },
-    "/companies": { title: `Our Companies — ${content.brandName}`, description: "Explore the operating companies within SAMWATEX, including HMD International Group and future group companies.", crumbs: ["Companies"] },
-    "/industries": { title: `Industries & Products — ${content.brandName}`, description: "Explore SAMWATEX commercial focus across textiles, apparel, general merchandise, international trade and distribution.", crumbs: ["Industries & Products"] },
-    "/global-reach": { title: `Global Reach — ${content.brandName}`, description: "SAMWATEX is based in Lebanon and serves export relationships across Africa, the Middle East and selected international markets.", crumbs: ["Global Reach"] },
-    "/gallery": { title: `Gallery — ${content.brandName}`, description: "Explore SAMWATEX visual stories across the group, HMD International Group, products, trade, export and operations.", crumbs: ["Gallery"] },
-    "/what-we-do": { title: `What We Do — ${content.brandName}`, description: "International trade, sourcing, supply, export coordination and distribution capabilities from SAMWATEX in Lebanon.", crumbs: ["What We Do"] },
-    "/contact": { title: `Contact ${content.brandName} — Business Enquiries`, description: `Contact SAMWATEX in Lebanon for commercial, export, sourcing, supplier, partnership and HMD International Group enquiries.`, crumbs: ["Contact"] },
+    "/about": {
+      title: `About ${content.brandName} — Used Clothing & Textile Export`,
+      description: "Learn how SAMWATEX prepares reusable clothing and textile goods in Lebanon through sorting, grading, baling and wholesale export.",
+      crumbs: ["About"],
+    },
+    "/what-we-do": {
+      title: `What We Do — Sorting, Grading & Export | ${content.brandName}`,
+      description: "SAMWATEX receives, sorts, grades, prepares and exports used clothing and textile goods for wholesale markets from Lebanon.",
+      crumbs: ["What We Do"],
+    },
+    "/products": {
+      title: `Wholesale Used Clothing Products — ${content.brandName}`,
+      description: "Explore wholesale men's, women's and children's used clothing, footwear, bags, accessories and household textile categories prepared by SAMWATEX.",
+      crumbs: ["Products"],
+    },
+    "/process": {
+      title: `Used Clothing Sorting & Grading Process — ${content.brandName}`,
+      description: "See the SAMWATEX process from incoming used clothing through sorting, grading, market-mix preparation, baling and export from Lebanon.",
+      crumbs: ["Process"],
+    },
+    "/export-markets": {
+      title: `Used Clothing Export & Logistics — ${content.brandName}`,
+      description: "See how SAMWATEX prepares wholesale used clothing orders in Lebanon for baling, staging, container loading and export to Africa, the Middle East and selected markets.",
+      crumbs: ["Export & Logistics"],
+    },
+    "/sustainability": {
+      title: `Textile Reuse & Second-Life Clothing — ${content.brandName}`,
+      description: "SAMWATEX extends the useful commercial life of reusable clothing and textiles through sorting, grading, wholesale preparation and redistribution from Lebanon.",
+      crumbs: ["Textile Reuse"],
+    },
+    "/gallery": {
+      title: `Operations Gallery — ${content.brandName}`,
+      description: "Explore SAMWATEX sorting, grading, products, bales, loading, HMD International Group and export preparation from Lebanon.",
+      crumbs: ["Gallery"],
+    },
+    "/contact": {
+      title: `Contact ${content.brandName} — Wholesale Used Clothing Enquiries`,
+      description: "Contact SAMWATEX in Lebanon for wholesale used clothing, textile category, export, supplier and HMD International Group enquiries.",
+      crumbs: ["Contact"],
+    },
   };
   const found = routes[pathname];
   return found ? { ...found, known: true } : { title: `Page Not Found — ${content.brandName}`, description: "The requested SAMWATEX page could not be found.", known: false, crumbs: [] as string[] };

@@ -12,7 +12,8 @@
     "start": "node dist-server/server/index.js",
     "typecheck": "tsc --noEmit && tsc -p tsconfig.server.json --noEmit",
     "verify:phase15": "node scripts/phase15-verify.mjs",
-    "check": "npm run typecheck && npm run build && npm run verify:phase15"
+    "verify:phase10": "node scripts/phase10-verify.mjs",
+    "check": "npm run typecheck && npm run build && npm run verify:phase10"
   },
   "dependencies": {
     "compression": "^1.8.1",
