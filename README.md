@@ -13,7 +13,10 @@ Premium branded corporate website for **SAMWATEX**, a Lebanon-based parent group
 - SAMWATEX parent-company content model with subsidiaries
 - Persistent photo/PDF media library with upload, replace, edit, delete and reorder controls
 - Premium responsive experience for phone, tablet, laptop and desktop
-- Dynamic SEO/social metadata managed from the CMS
+- Dynamic route-level SEO, OpenGraph/Twitter metadata and JSON-LD structured data
+- CMS-driven sitemap generation including future subsidiaries
+- Route-level code splitting, shared content-request deduplication, response compression and production cache strategy
+- High-priority hero image delivery plus lazy-loaded gallery media
 - About, Story, Vision & Mission, Companies, HMD company profile, Industries & Products, Global Reach, Gallery, What We Do and Contact pages
 - Render Blueprint for a standalone web service + PostgreSQL database
 
@@ -39,6 +42,31 @@ Premium branded corporate website for **SAMWATEX**, a Lebanon-based parent group
 - `/contact` — structured commercial, product, export, supplier and partnership enquiries
 - `/admin` — private SAMWATEX CMS
 
+Unknown public routes render a branded 404 and receive an HTTP 404 response in production rather than redirecting to the homepage.
+
+## SEO, social and performance
+
+Phase 13 includes:
+
+- Route-specific titles and descriptions
+- Canonical URLs
+- OpenGraph and Twitter sharing cards
+- CMS-controlled social image
+- Organization, WebSite, WebPage and operating-company JSON-LD
+- Breadcrumb structured data
+- `noindex` handling for unknown routes and the private admin surface
+- Dynamic `sitemap.xml` generated from current CMS companies
+- Static sitemap fallback and crawler rules
+- React route-level lazy loading/code splitting
+- Deduplicated `/api/site-content` loading across pages
+- Brotli/gzip-capable Express response compression middleware
+- Immutable one-year caching for hashed Vite assets
+- Extended media caching with ETags
+- High-priority homepage hero image delivery
+- Native lazy loading and async decoding for gallery imagery
+- Browser `content-visibility` optimizations for deep off-screen sections
+- Reduced-data and reduced-motion handling
+
 ## CMS
 
 The `/admin` workspace includes:
@@ -60,7 +88,7 @@ The `/admin` workspace includes:
 
 ## Media storage
 
-Media assets are stored persistently in the SAMWATEX PostgreSQL database and served through `/api/media/:id`. This keeps the first production setup self-contained and avoids Render's ephemeral filesystem. Supported uploads are JPEG, PNG, WebP, GIF and PDF up to 8 MB each.
+Media assets are stored persistently in the SAMWATEX PostgreSQL database and served through `/api/media/:id`. Supported uploads are JPEG, PNG, WebP, GIF and PDF up to 8 MB each.
 
 When the media library grows significantly, the storage layer can later be moved to object storage/CDN without changing the public content model because the CMS already stores media by stable URL.
 
@@ -96,4 +124,4 @@ Before the first public deployment, set `ADMIN_PASSWORD` in Render and keep the 
 
 ## Build programme
 
-Phases 1–3 establish the SAMWATEX foundation, premium homepage and corporate identity pages. Phases 4–6 add the group-company portfolio, reusable subsidiary profiles, the full HMD International Group profile, and the industries/product framework. Phases 7–9 add Global Reach/export-market storytelling, a filterable gallery, and the structured commercial enquiry system. **Phases 10–12 add the full CMS, persistent media manager, admin/enquiry workflows, dynamic SEO controls and the major premium visual/refinement pass.** Remaining phases cover SEO/performance hardening, security hardening, final QA and production deployment.
+Phases 1–3 establish the SAMWATEX foundation, premium homepage and corporate identity pages. Phases 4–6 add the group-company portfolio, reusable subsidiary profiles, the full HMD International Group profile, and the industries/product framework. Phases 7–9 add Global Reach/export-market storytelling, a filterable gallery, and the structured commercial enquiry system. Phases 10–12 add the full CMS, persistent media manager, admin/enquiry workflows, dynamic SEO controls and the premium visual/refinement pass. **Phase 13 completes the SEO, social-sharing and performance hardening layer.** Remaining phases cover security hardening, final QA and production deployment.
