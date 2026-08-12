@@ -99,6 +99,25 @@ Phase 14 includes:
 
 See `SECURITY.md` for the complete security model and production rules.
 
+## Final QA and verification
+
+Phase 15 is enforced by the `npm run check` CI gate and includes:
+
+- client and server TypeScript verification
+- production frontend and server compilation
+- dependency vulnerability audit at high severity or above
+- responsive-contract checks for phone, tablet, laptop and large desktop breakpoints
+- production bundle/chunk verification and a maximum main-chunk guard
+- production-server health and route smoke testing
+- HTTP 404 and legacy redirect verification
+- CSP, HSTS, clickjacking, `nosniff`, COOP/CORP and Express fingerprint checks
+- private-admin caching and search-index exclusion checks
+- admin login, secure-session-cookie, CSRF and same-origin protection checks
+- sitemap verification including the HMD company route
+- public enquiry and anti-bot honeypot smoke checks
+
+The GitHub Actions workflow runs this complete verification gate on every push to `main` and every pull request.
+
 ## CMS
 
 The `/admin` workspace includes:
@@ -156,4 +175,4 @@ Before the first public deployment, set a strong `ADMIN_PASSWORD` in Render and 
 
 ## Build programme
 
-Phases 1–3 establish the SAMWATEX foundation, premium homepage and corporate identity pages. Phases 4–6 add the group-company portfolio, reusable subsidiary profiles, the full HMD International Group profile, and the industries/product framework. Phases 7–9 add Global Reach/export-market storytelling, a filterable gallery, and the structured commercial enquiry system. Phases 10–12 add the full CMS, persistent media manager, admin/enquiry workflows, dynamic SEO controls and the premium visual/refinement pass. Phase 13 completes SEO, social-sharing and performance hardening. **Phase 14 completes application-security hardening.** Remaining phases are final QA/verification and production deployment.
+Phases 1–3 establish the SAMWATEX foundation, premium homepage and corporate identity pages. Phases 4–6 add the group-company portfolio, reusable subsidiary profiles, the full HMD International Group profile, and the industries/product framework. Phases 7–9 add Global Reach/export-market storytelling, a filterable gallery, and the structured commercial enquiry system. Phases 10–12 add the full CMS, persistent media manager, admin/enquiry workflows, dynamic SEO controls and the premium visual/refinement pass. Phase 13 completes SEO, social-sharing and performance hardening. **Phase 14 completes application-security hardening. Phase 15 completes final QA and automated production verification.** The remaining step is production deployment and provider-level deployment validation.
