@@ -12,7 +12,7 @@ Premium branded corporate website for **SAMWATEX**, a Lebanon-based parent group
 - Password-protected `/admin` content editor foundation
 - SAMWATEX parent-company content model with subsidiaries
 - Premium responsive homepage for phone, tablet, laptop and desktop
-- About, Story, Vision & Mission, What We Do and Contact pages
+- About, Story, Vision & Mission, Companies, HMD company profile, Industries & Products, What We Do and Contact pages
 - Render Blueprint for a standalone web service + PostgreSQL database
 
 ## Brand structure
@@ -28,6 +28,9 @@ Premium branded corporate website for **SAMWATEX**, a Lebanon-based parent group
 - `/about` — Who We Are + values
 - `/about/story` — Group story + structure
 - `/about/vision` — Vision + mission
+- `/companies` — SAMWATEX operating-company portfolio
+- `/companies/hmd-international-group` — full HMD International Group profile
+- `/industries` — industries, product collections and commercial categories
 - `/what-we-do` — International trade, sourcing and distribution capabilities
 - `/contact` — Commercial enquiry and Beirut contact details
 - `/admin` — Private content editor
@@ -60,4 +63,4 @@ Before the first public deployment, set `ADMIN_PASSWORD` in Render and use a str
 
 ## Build programme
 
-Phases 1–3 establish the SAMWATEX foundation, premium homepage and corporate identity pages. Subsequent phases expand subsidiaries, HMD’s full profile, product/industry content, markets, media management, CMS capability, visual refinement and final launch hardening.
+Phases 1–3 establish the SAMWATEX foundation, premium homepage and corporate identity pages. Phases 4–6 add the group-company portfolio, reusable subsidiary profiles, the full HMD International Group profile, and the industries/product framework. Subsequent phases expand global-reach storytelling, gallery/media, enquiries, CMS capability, visual refinement and final launch hardening.
