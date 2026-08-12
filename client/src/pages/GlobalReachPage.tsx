@@ -17,15 +17,32 @@ const exportSteps = [
   },
   {
     number: "03",
-    title: "Prepare the shipment",
-    description: "Bale, identify and stage confirmed goods for handling and container loading from Lebanon.",
+    title: "Confirm the order",
+    description: "Agree the commercial scope before product is committed to final baling and shipment preparation.",
   },
   {
     number: "04",
-    title: "Coordinate export",
-    description: "Bring the commercial order and physical movement together for the destination market.",
+    title: "Bale & identify",
+    description: "Prepare confirmed goods for efficient handling with clear category or assortment identification.",
   },
-];
+  {
+    number: "05",
+    title: "Stage & load",
+    description: "Organize finished bales for warehouse movement and container loading from the Lebanon operation.",
+  },
+  {
+    number: "06",
+    title: "Coordinate export",
+    description: "Keep the commercial order connected to shipment preparation and the agreed destination-market requirements.",
+  },
+] as const;
+
+const logisticsNotes = [
+  ["Packing", "Baled goods are prepared for efficient warehouse handling and container loading."],
+  ["Identification", "Categories and assortments are kept clear so the shipment matches the confirmed buyer brief."],
+  ["Loading", "Finished orders are staged for container movement from the Lebanon operating base."],
+  ["Coordination", "HMD and SAMWATEX keep buyer, product and shipment information aligned through export preparation."],
+] as const;
 
 export function GlobalReachPage() {
   const [content, setContent] = useState<SiteContent>(defaultSiteContent);
@@ -37,8 +54,8 @@ export function GlobalReachPage() {
   return (
     <div className="inner-page reach-page textile-export-page">
       <section className="page-hero reach-hero textile-page-hero">
-        <p className="eyebrow light">Export markets</p>
-        <h1>Wholesale textile exports from one operating base in Lebanon.</h1>
+        <p className="eyebrow light">Export & logistics</p>
+        <h1>Wholesale textile exports prepared from one operating base in Lebanon.</h1>
         <p className="page-hero-copy">
           SAMWATEX prepares reusable clothing and textile goods in Lebanon for wholesale customers across Africa, the Middle East and selected additional markets.
         </p>
@@ -60,14 +77,14 @@ export function GlobalReachPage() {
           <div className="reach-origin">
             <span>Operating base</span>
             <strong>Lebanon</strong>
-            <small>Sorting · grading · export</small>
+            <small>Sorting · grading · baling · export</small>
           </div>
           <div className="reach-route route-one" aria-hidden="true" />
           <div className="reach-route route-two" aria-hidden="true" />
           <div className="reach-route route-three" aria-hidden="true" />
           {content.markets.map((market, index) => (
             <div className={`reach-destination destination-${index + 1}`} key={market.region}>
-              <span>0{index + 1}</span>
+              <span>{String(index + 1).padStart(2, "0")}</span>
               <strong>{market.region}</strong>
               <small>{market.description}</small>
             </div>
@@ -75,7 +92,7 @@ export function GlobalReachPage() {
         </div>
       </section>
 
-      <section className="reach-principles section-pad section-dark">
+      <section className="reach-principles section-pad section-dark export-workflow-section">
         <div className="section-heading-row">
           <div>
             <p className="eyebrow light">Export workflow</p>
@@ -85,13 +102,25 @@ export function GlobalReachPage() {
             A useful export order starts with a clear market brief, then works backward into categories, assortment, baling and shipment preparation.
           </p>
         </div>
-        <div className="reach-step-grid">
+        <div className="reach-step-grid export-step-grid">
           {exportSteps.map((step) => (
             <article key={step.number}>
               <span>{step.number}</span>
               <h3>{step.title}</h3>
               <p>{step.description}</p>
             </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="logistics-detail section-pad section-warm">
+        <div className="section-heading-row">
+          <div><p className="eyebrow">Shipment preparation</p><h2>Commercially simple. Operationally disciplined.</h2></div>
+          <p className="section-note">SAMWATEX prepares the goods and coordinates the export process. Carrier services, sailing schedules and destination clearance depend on the shipment and the parties appointed for that movement.</p>
+        </div>
+        <div className="logistics-detail-grid">
+          {logisticsNotes.map(([title, body], index) => (
+            <article key={title}><span>{String(index + 1).padStart(2, "0")}</span><h3>{title}</h3><p>{body}</p></article>
           ))}
         </div>
       </section>
@@ -104,19 +133,19 @@ export function GlobalReachPage() {
         <div className="market-detail-grid">
           {content.markets.map((market, index) => (
             <article key={market.region}>
-              <span>0{index + 1}</span>
+              <span>{String(index + 1).padStart(2, "0")}</span>
               <div><h3>{market.region}</h3><p>{market.description}</p></div>
             </article>
           ))}
         </div>
       </section>
 
-      <section className="contact-band reach-contact-band textile-contact-band">
-        <div>
-          <p className="eyebrow">Export enquiries</p>
-          <h2>Tell us the destination and product mix you need.</h2>
+      <section className="export-enquiry-brief section-pad section-dark">
+        <div className="section-heading-row">
+          <div><p className="eyebrow light">For a useful quote</p><h2>Send the information that changes the order.</h2></div>
+          <p className="section-note light-note">Destination, category, season, preferred condition or grade, expected volume and any packing requirement give HMD enough context to start a real commercial discussion.</p>
         </div>
-        <Link className="button light" to="/contact?type=export">Start an export enquiry</Link>
+        <Link className="button primary" to="/contact?type=export">Start an export enquiry</Link>
       </section>
     </div>
   );
