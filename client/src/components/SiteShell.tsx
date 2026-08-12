@@ -7,12 +7,11 @@ import { SeoManager } from "@client/components/SeoManager";
 
 const navItems = [
   ["/about", "About"],
-  ["/what-we-do", "What we do"],
   ["/products", "Products"],
   ["/process", "Process"],
   ["/companies/hmd-international-group", "HMD"],
   ["/export-markets", "Export"],
-  ["/sustainability", "Reuse"],
+  ["/sustainability", "Textile reuse"],
   ["/gallery", "Gallery"],
 ] as const;
 
@@ -43,8 +42,37 @@ export function SiteShell() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    const targets = Array.from(document.querySelectorAll<HTMLElement>(
+      "main .section-pad, main .contact-band, main .statement-section",
+    ));
+    if (!targets.length) return;
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    targets.forEach((target, index) => {
+      target.classList.add("phase9-reveal");
+      target.style.setProperty("--phase9-delay", `${Math.min(index, 5) * 35}ms`);
+    });
+
+    if (reducedMotion || !("IntersectionObserver" in window)) {
+      targets.forEach((target) => target.classList.add("phase9-visible"));
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        (entry.target as HTMLElement).classList.add("phase9-visible");
+        observer.unobserve(entry.target);
+      }
+    }, { threshold: 0.08, rootMargin: "0px 0px -7% 0px" });
+
+    targets.forEach((target) => observer.observe(target));
+    return () => observer.disconnect();
+  }, [location.pathname]);
+
   return (
-    <div className="site-shell textile-site-shell">
+    <div className="site-shell textile-site-shell phase9-site">
       <SeoManager content={content} />
       <header className={`site-header ${scrolled ? "scrolled" : ""}`}>
         <Link to="/" className="brand" aria-label={`${content.brandName} home`}>
@@ -60,7 +88,7 @@ export function SiteShell() {
         </nav>
 
         <div className="header-actions">
-          <Link className="header-cta" to="/contact">Enquire</Link>
+          <Link className="header-cta" to="/contact">Wholesale enquiry</Link>
           <button
             className={`menu-toggle ${menuOpen ? "active" : ""}`}
             type="button"
