@@ -9,6 +9,7 @@ import "./phases13.css";
 import "./editorial-refinement.css";
 import "./textile-reposition.css";
 import "./phases5-8.css";
+import "./phase9.css";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
