@@ -8,10 +8,12 @@ Premium branded corporate website for **SAMWATEX**, a Lebanon-based parent group
 
 - Responsive React + TypeScript + Vite public frontend
 - Express + TypeScript backend
-- PostgreSQL persistence for editable site content and structured business enquiries
-- Password-protected `/admin` content editor foundation
+- PostgreSQL persistence for editable site content, business enquiries, media, admin users and audit history
+- Full private `/admin` CMS
 - SAMWATEX parent-company content model with subsidiaries
+- Persistent photo/PDF media library with upload, replace, edit, delete and reorder controls
 - Premium responsive experience for phone, tablet, laptop and desktop
+- Dynamic SEO/social metadata managed from the CMS
 - About, Story, Vision & Mission, Companies, HMD company profile, Industries & Products, Global Reach, Gallery, What We Do and Contact pages
 - Render Blueprint for a standalone web service + PostgreSQL database
 
@@ -35,11 +37,36 @@ Premium branded corporate website for **SAMWATEX**, a Lebanon-based parent group
 - `/gallery` — filterable group/company/product visual storytelling
 - `/what-we-do` — International trade, sourcing and distribution capabilities
 - `/contact` — structured commercial, product, export, supplier and partnership enquiries
-- `/admin` — Private content editor
+- `/admin` — private SAMWATEX CMS
+
+## CMS
+
+The `/admin` workspace includes:
+
+- Dashboard with company, industry, media and new-enquiry metrics
+- Homepage, hero, About and capability editing
+- Company/subsidiary add/edit/reorder/remove controls
+- Industry and product-collection management
+- Export-market and homepage-statistic management
+- Gallery composition and media assignment
+- Media library upload, replacement, metadata editing, deletion and reordering
+- Enquiry inbox with `new`, `read`, `replied` and `archived` status handling
+- SEO title, description and social-image settings
+- Contact/footer settings
+- Administrator creation/activation controls
+- Admin audit history
+
+`ADMIN_USERNAME` and `ADMIN_PASSWORD` seed the first administrator. The default username is `admin` when `ADMIN_USERNAME` is omitted.
+
+## Media storage
+
+Media assets are stored persistently in the SAMWATEX PostgreSQL database and served through `/api/media/:id`. This keeps the first production setup self-contained and avoids Render's ephemeral filesystem. Supported uploads are JPEG, PNG, WebP, GIF and PDF up to 8 MB each.
+
+When the media library grows significantly, the storage layer can later be moved to object storage/CDN without changing the public content model because the CMS already stores media by stable URL.
 
 ## Enquiry system
 
-The public enquiry form captures enquiry type, contact details, country/market, company of interest, product/category and message. Enquiries are stored in PostgreSQL with a status lifecycle (`new`, `read`, `replied`, `archived`) and a generated SAMWATEX reference number. Admin-authenticated API routes are available for later CMS inbox integration.
+The public enquiry form captures enquiry type, contact details, country/market, company of interest, product/category and message. Enquiries are stored in PostgreSQL with a status lifecycle (`new`, `read`, `replied`, `archived`) and a generated SAMWATEX reference number. The CMS includes the business-enquiry inbox and status workflow.
 
 ## Contact details
 
@@ -65,8 +92,8 @@ The included `render.yaml` provisions a standalone SAMWATEX web service and Post
 - `samwatex.com`
 - `www.samwatex.com`
 
-Before the first public deployment, set `ADMIN_PASSWORD` in Render and use a strong generated `SESSION_SECRET`.
+Before the first public deployment, set `ADMIN_PASSWORD` in Render and keep the generated `SESSION_SECRET` private. `ADMIN_USERNAME` defaults to `admin` in the Blueprint and can be changed before deployment.
 
 ## Build programme
 
-Phases 1–3 establish the SAMWATEX foundation, premium homepage and corporate identity pages. Phases 4–6 add the group-company portfolio, reusable subsidiary profiles, the full HMD International Group profile, and the industries/product framework. Phases 7–9 add Global Reach/export-market storytelling, a filterable media-ready gallery, and the structured commercial enquiry system. Subsequent phases expand the CMS/media manager, premium visual refinement, SEO/performance/security hardening and final launch verification.
+Phases 1–3 establish the SAMWATEX foundation, premium homepage and corporate identity pages. Phases 4–6 add the group-company portfolio, reusable subsidiary profiles, the full HMD International Group profile, and the industries/product framework. Phases 7–9 add Global Reach/export-market storytelling, a filterable gallery, and the structured commercial enquiry system. **Phases 10–12 add the full CMS, persistent media manager, admin/enquiry workflows, dynamic SEO controls and the major premium visual/refinement pass.** Remaining phases cover SEO/performance hardening, security hardening, final QA and production deployment.
