@@ -7,20 +7,26 @@ export type MediaAsset = { id: string; fileName: string; mimeType: string; sizeB
 export type AdminUser = { id: string; username: string; displayName: string; role: string; active: boolean; createdAt: string; };
 export type AuditEntry = { id: string; adminUsername: string; action: string; details: Record<string, unknown>; createdAt: string; };
 
+let siteContentPromise: Promise<SiteContent> | null = null;
+
 async function json<T>(response: Response): Promise<T> {
   const body = (await response.json().catch(() => ({}))) as T & { message?: string };
   if (!response.ok) throw new Error(body.message || `Request failed (${response.status})`);
   return body;
 }
 
-export async function getSiteContent(): Promise<SiteContent> {
-  try {
-    const response = await fetch("/api/site-content");
-    if (!response.ok) throw new Error("Unable to load site content");
-    return normalizeSiteContent(await response.json());
-  } catch {
-    return structuredClone(defaultSiteContent);
-  }
+function loadSiteContent() {
+  return fetch("/api/site-content", { headers: { Accept: "application/json" } })
+    .then(async (response) => {
+      if (!response.ok) throw new Error("Unable to load site content");
+      return normalizeSiteContent(await response.json());
+    })
+    .catch(() => structuredClone(defaultSiteContent));
+}
+
+export function getSiteContent(): Promise<SiteContent> {
+  if (!siteContentPromise) siteContentPromise = loadSiteContent();
+  return siteContentPromise;
 }
 
 export async function adminLogin(username: string, password: string): Promise<void> {
@@ -35,7 +41,9 @@ export async function getAdminSession(): Promise<AdminSession> {
 }
 export async function saveSiteContent(content: SiteContent): Promise<SiteContent> {
   const response = await fetch("/api/admin/site-content", { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify(content) });
-  return normalizeSiteContent(await json(response));
+  const saved = normalizeSiteContent(await json(response));
+  siteContentPromise = Promise.resolve(saved);
+  return saved;
 }
 
 export async function getInquiries(status = ""): Promise<AdminInquiry[]> {
