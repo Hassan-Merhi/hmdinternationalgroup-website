@@ -17,6 +17,7 @@ Premium branded corporate website for **SAMWATEX**, a Lebanon-based parent group
 - CMS-driven sitemap generation including future subsidiaries
 - Route-level code splitting, shared content-request deduplication, response compression and production cache strategy
 - High-priority hero image delivery plus lazy-loaded gallery media
+- Hardened admin authentication, CSRF protection, rate limiting, upload signature checks and browser security headers
 - About, Story, Vision & Mission, Companies, HMD company profile, Industries & Products, Global Reach, Gallery, What We Do and Contact pages
 - Render Blueprint for a standalone web service + PostgreSQL database
 
@@ -67,6 +68,37 @@ Phase 13 includes:
 - Browser `content-visibility` optimizations for deep off-screen sections
 - Reduced-data and reduced-motion handling
 
+## Security hardening
+
+Phase 14 includes:
+
+- production fail-fast for short/missing session secrets
+- password hashing with `scrypt` and unique salts
+- minimum 14-character password policy for bootstrap/new/reset admin credentials
+- generic login failure messages and dummy password verification to reduce username enumeration signals
+- per-IP login throttling plus failed IP/username lockout
+- session-ID regeneration after successful login
+- `HttpOnly`, production `Secure`, `SameSite=Strict` admin cookies
+- 12-hour absolute admin sessions
+- cryptographically random per-session CSRF tokens
+- CSRF enforcement on all state-changing CMS requests
+- Origin / Fetch Metadata protection for the admin API
+- admin session-version revocation after password/account changes
+- owner-only administrator creation/account mutation
+- CSP, HSTS, clickjacking, `nosniff`, referrer and permissions security headers
+- Express fingerprint removal
+- private CMS `no-store` response handling
+- default 256 KB JSON body ceiling, with the larger request allowance isolated to authenticated media upload/replacement routes
+- JPEG/PNG/WebP/GIF/PDF allow-listing plus file magic-byte validation
+- normalized media filenames and forced PDF download delivery
+- bounded CMS payloads, record counts, slugs and asset URLs
+- public enquiry throttling, honeypot, timing signal, duplicate suppression and input bounds
+- hashed-IP failed-login audit records
+- immediate audit trail for content, enquiries, media and admin operations
+- automatic `site_content_history` snapshots before CMS content updates
+
+See `SECURITY.md` for the complete security model and production rules.
+
 ## CMS
 
 The `/admin` workspace includes:
@@ -84,7 +116,7 @@ The `/admin` workspace includes:
 - Administrator creation/activation controls
 - Admin audit history
 
-`ADMIN_USERNAME` and `ADMIN_PASSWORD` seed the first administrator. The default username is `admin` when `ADMIN_USERNAME` is omitted.
+`ADMIN_USERNAME` and `ADMIN_PASSWORD` seed the first administrator. The default username is `admin` when `ADMIN_USERNAME` is omitted. Production bootstrap passwords must be unique passphrases of at least 14 characters.
 
 ## Media storage
 
@@ -120,8 +152,8 @@ The included `render.yaml` provisions a standalone SAMWATEX web service and Post
 - `samwatex.com`
 - `www.samwatex.com`
 
-Before the first public deployment, set `ADMIN_PASSWORD` in Render and keep the generated `SESSION_SECRET` private. `ADMIN_USERNAME` defaults to `admin` in the Blueprint and can be changed before deployment.
+Before the first public deployment, set a strong `ADMIN_PASSWORD` in Render and keep the generated `SESSION_SECRET` private. `ADMIN_USERNAME` defaults to `admin` in the Blueprint and can be changed before deployment. Provider-level PostgreSQL backup/recovery settings are verified during the deployment phase.
 
 ## Build programme
 
-Phases 1–3 establish the SAMWATEX foundation, premium homepage and corporate identity pages. Phases 4–6 add the group-company portfolio, reusable subsidiary profiles, the full HMD International Group profile, and the industries/product framework. Phases 7–9 add Global Reach/export-market storytelling, a filterable gallery, and the structured commercial enquiry system. Phases 10–12 add the full CMS, persistent media manager, admin/enquiry workflows, dynamic SEO controls and the premium visual/refinement pass. **Phase 13 completes the SEO, social-sharing and performance hardening layer.** Remaining phases cover security hardening, final QA and production deployment.
+Phases 1–3 establish the SAMWATEX foundation, premium homepage and corporate identity pages. Phases 4–6 add the group-company portfolio, reusable subsidiary profiles, the full HMD International Group profile, and the industries/product framework. Phases 7–9 add Global Reach/export-market storytelling, a filterable gallery, and the structured commercial enquiry system. Phases 10–12 add the full CMS, persistent media manager, admin/enquiry workflows, dynamic SEO controls and the premium visual/refinement pass. Phase 13 completes SEO, social-sharing and performance hardening. **Phase 14 completes application-security hardening.** Remaining phases are final QA/verification and production deployment.
