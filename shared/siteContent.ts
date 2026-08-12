@@ -85,47 +85,47 @@ export type SiteContent = {
 export const defaultSiteContent: SiteContent = {
   brandName: "SAMWATEX",
   brandDescriptor: "International Group",
-  heroEyebrow: "Lebanon • International Trade • Export",
-  heroTitle: "From Lebanon to markets that move.",
+  heroEyebrow: "Beirut, Lebanon · Trade & Export",
+  heroTitle: "Trade from Lebanon, built around the market.",
   heroSubtitle:
-    "SAMWATEX is a Lebanon-based group connecting sourcing, trade and export opportunities with customers across Africa, the Middle East and international markets.",
+    "SAMWATEX works with suppliers, customers and distributors to source products, coordinate exports and support market supply across Africa, the Middle East and selected international markets.",
   heroImageUrl: "",
-  aboutTitle: "A focused group built for international trade.",
+  aboutTitle: "A commercial group with Lebanon at the center.",
   aboutBody:
-    "SAMWATEX brings together commercial relationships, sourcing capability and export execution from its base in Lebanon. The group is built around long-term partnerships, dependable movement of goods and a practical understanding of the markets it serves.",
-  capabilitiesTitle: "Built around the movement of goods and opportunity.",
+    "SAMWATEX operates from Lebanon through close supplier and customer relationships. We source, trade and coordinate export supply for markets where consistency, speed and practical execution matter.",
+  capabilitiesTitle: "From requirement to market supply.",
   capabilities: [
     {
       eyebrow: "01",
       title: "International Trade & Export",
       description:
-        "Commercial coordination from Lebanon into established and developing markets across Africa, the Middle East and beyond.",
+        "We coordinate commercial requirements, supply and export movement from Lebanon into the markets we serve.",
     },
     {
       eyebrow: "02",
       title: "Sourcing & Supply",
       description:
-        "A relationship-led approach to sourcing products, aligning supply and supporting dependable fulfilment for customers and partners.",
+        "We work with suppliers to match products, quantities and timing to customer requirements and market demand.",
     },
     {
       eyebrow: "03",
       title: "Distribution Partnerships",
       description:
-        "Long-term market relationships designed to connect the right products with the right commercial channels.",
+        "We build market relationships with customers and distributors who need dependable continuity of supply.",
     },
   ],
-  companiesTitle: "One group. Distinct operating companies.",
+  companiesTitle: "HMD International Group, under SAMWATEX.",
   companies: [
     {
       slug: "hmd-international-group",
       name: "HMD International Group",
       shortName: "HMD",
       relationship: "A SAMWATEX Company",
-      tagline: "Commercial execution built close to the market.",
+      tagline: "Trading, sourcing and market supply.",
       description:
-        "An operating company within the SAMWATEX group focused on trading, product movement and dependable market supply.",
+        "HMD International Group is the operating company within SAMWATEX focused on trading, product sourcing, distribution and market fulfilment.",
       overview:
-        "HMD International Group operates within the SAMWATEX portfolio as a commercially focused company supporting sourcing, trading, distribution and market fulfilment. Its role is practical: connect supply with demand, coordinate movement and build dependable customer relationships across the markets it serves.",
+        "HMD International Group operates within SAMWATEX as the market-facing trading company. It works across sourcing, product supply, distribution and export coordination, with a focus on practical execution and long-term customer relationships.",
       focusAreas: [
         "International trading and supply",
         "Textiles, apparel and general merchandise",
@@ -135,14 +135,14 @@ export const defaultSiteContent: SiteContent = {
       markets: ["Africa", "Middle East", "Selected international markets"],
     },
   ],
-  industriesTitle: "Commercial focus across products, trade and distribution.",
+  industriesTitle: "Products and commercial categories we work with.",
   industries: [
     {
       slug: "textiles-apparel",
       eyebrow: "01",
       title: "Textiles & Apparel",
       description:
-        "A commercial category built around sourcing, trading and supplying textile and apparel products for market demand.",
+        "Sourcing and supply across textile and apparel categories according to customer requirements and market demand.",
       highlights: ["Sourcing", "Trade coordination", "Market supply"],
       companySlugs: ["hmd-international-group"],
     },
@@ -151,7 +151,7 @@ export const defaultSiteContent: SiteContent = {
       eyebrow: "02",
       title: "General Merchandise",
       description:
-        "Flexible product sourcing and supply across selected commercial categories where dependable availability and execution matter.",
+        "Selected consumer and commercial product lines sourced and supplied around availability, specification and target-market needs.",
       highlights: ["Multi-category sourcing", "Export coordination", "Commercial supply"],
       companySlugs: ["hmd-international-group"],
     },
@@ -160,7 +160,7 @@ export const defaultSiteContent: SiteContent = {
       eyebrow: "03",
       title: "International Trade",
       description:
-        "Cross-border commercial coordination connecting suppliers, customers and market opportunities from SAMWATEX's base in Lebanon.",
+        "Commercial coordination between suppliers, customers and export markets from SAMWATEX's operating base in Lebanon.",
       highlights: ["Export", "Supplier relationships", "Commercial coordination"],
       companySlugs: ["hmd-international-group"],
     },
@@ -169,7 +169,7 @@ export const defaultSiteContent: SiteContent = {
       eyebrow: "04",
       title: "Distribution & Fulfilment",
       description:
-        "The operating discipline behind getting products from source to market with visibility, consistency and dependable execution.",
+        "Coordination of supply and market fulfilment so products move from source to customer with clear commercial accountability.",
       highlights: ["Distribution", "Inventory movement", "Market fulfilment"],
       companySlugs: ["hmd-international-group"],
     },
@@ -178,92 +178,92 @@ export const defaultSiteContent: SiteContent = {
     {
       title: "Textile & apparel products",
       description:
-        "A broad commercial portfolio serving textile and apparel demand, with exact product lines to be presented as the public catalog develops.",
+        "Textile and apparel supply selected around customer specifications, seasonality, destination market and available sourcing.",
       examples: ["Apparel", "Textile goods", "Seasonal product lines"],
     },
     {
       title: "General merchandise",
       description:
-        "Selected consumer and commercial goods sourced according to market requirements and supply opportunities.",
+        "Consumer and commercial goods sourced according to market requirements, supplier availability and shipment economics.",
       examples: ["Consumer goods", "Commercial stock lines", "Market-specific assortments"],
     },
     {
       title: "Commercial sourcing",
       description:
-        "Partner-led sourcing for products and categories that fit customer demand, target markets and practical fulfilment requirements.",
+        "Product sourcing matched to customer demand, destination-market requirements and practical fulfilment conditions.",
       examples: ["Supplier sourcing", "Product matching", "Export-ready supply"],
     },
   ],
-  marketsTitle: "Lebanon based. Internationally connected.",
+  marketsTitle: "From Lebanon to the markets we serve.",
   markets: [
     {
       region: "Africa",
-      description: "Export relationships and commercial opportunities across African markets.",
+      description: "Export relationships and customer supply across selected African markets.",
     },
     {
       region: "Middle East",
-      description: "Regional trade supported from SAMWATEX’s base in Lebanon.",
+      description: "Regional trade and supply coordinated from Lebanon.",
     },
     {
       region: "International Markets",
-      description: "A flexible export platform built to pursue the right opportunities globally.",
+      description: "Selected opportunities outside the core regions where the product, partner and commercial terms make sense.",
     },
   ],
-  galleryTitle: "The work, movement and companies behind the group.",
+  galleryTitle: "Products, operations and the work behind the group.",
   galleryItems: [
     {
       id: "samwatex-group",
       category: "SAMWATEX",
       company: "SAMWATEX",
-      title: "A group built from Lebanon outward.",
-      description: "Corporate storytelling for the parent group, its commercial relationships and international outlook.",
+      title: "The group from Lebanon.",
+      description: "SAMWATEX coordinates its commercial activity and export relationships from Lebanon.",
       imageUrl: "",
     },
     {
       id: "hmd-operating-company",
       category: "HMD",
       company: "HMD International Group",
-      title: "Commercial execution inside the group.",
-      description: "The operating-company story behind sourcing, trading, distribution and market fulfilment.",
+      title: "HMD International Group.",
+      description: "The operating company focused on trading, sourcing, distribution and market supply.",
       imageUrl: "",
     },
     {
       id: "international-movement",
       category: "Trade & Export",
       company: "SAMWATEX",
-      title: "From requirement to international movement.",
-      description: "Visual space for future export, shipment and trade-coordination photography.",
+      title: "International movement.",
+      description: "Export coordination linking product requirements, supply and destination markets.",
       imageUrl: "",
     },
     {
       id: "textile-apparel",
       category: "Products",
       company: "HMD International Group",
-      title: "Textiles and apparel for market demand.",
-      description: "A flexible visual collection for apparel, textile goods and market-specific assortments.",
+      title: "Textiles and apparel.",
+      description: "Commercial textile and apparel categories sourced around market requirements.",
       imageUrl: "",
     },
     {
       id: "general-merchandise",
       category: "Products",
       company: "HMD International Group",
-      title: "Selected general merchandise.",
-      description: "Product storytelling designed to expand as exact public product lines and photography are added.",
+      title: "General merchandise.",
+      description: "Selected product lines sourced and supplied according to customer and market needs.",
       imageUrl: "",
     },
     {
       id: "partner-coordination",
       category: "Operations",
       company: "SAMWATEX",
-      title: "Relationships behind dependable execution.",
-      description: "A visual layer for sourcing, commercial coordination and the partners that connect supply with market opportunity.",
+      title: "Supplier and customer coordination.",
+      description: "The commercial relationships that keep sourcing, supply and export execution moving.",
       imageUrl: "",
     },
   ],
-  statsTitle: "One base. A wider commercial horizon.",
+  statsTitle: "The group in four lines.",
   stats: [
-    { value: "Lebanon", label: "Home base" },
-    { value: "Africa", label: "Export market" },
+    { value: "Lebanon", label: "Operating base" },
+    { value: "Africa", label: "Core export region" },
     { value: "Middle East", label: "Regional market" },
     { value: "HMD", label: "Operating company" },
   ],
@@ -274,7 +274,7 @@ export const defaultSiteContent: SiteContent = {
   footerText: "SAMWATEX. All rights reserved.",
   seoTitle: "SAMWATEX — International Trade & Export Group",
   seoDescription:
-    "SAMWATEX is a Lebanon-based international group connecting sourcing, trade and export opportunities with markets across Africa, the Middle East and beyond.",
+    "SAMWATEX is a Lebanon-based group working across sourcing, trade and export supply for markets in Africa, the Middle East and selected international destinations.",
   seoSocialImageUrl: "",
 };
 
