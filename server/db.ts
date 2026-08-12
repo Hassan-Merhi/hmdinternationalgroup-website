@@ -6,6 +6,9 @@ export const pool = process.env.DATABASE_URL
   ? new Pool({
       connectionString: process.env.DATABASE_URL,
       ssl: process.env.NODE_ENV === "production" ? { rejectUnauthorized: false } : undefined,
+      max: 10,
+      idleTimeoutMillis: 30_000,
+      connectionTimeoutMillis: 10_000,
     })
   : null;
 
@@ -18,6 +21,20 @@ export async function initializeDatabase() {
       content JSONB NOT NULL,
       updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
     );
+  `);
+
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS site_content_history (
+      id BIGSERIAL PRIMARY KEY,
+      content JSONB NOT NULL,
+      changed_by TEXT NOT NULL DEFAULT 'system',
+      created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    );
+  `);
+
+  await pool.query(`
+    CREATE INDEX IF NOT EXISTS site_content_history_created_idx
+      ON site_content_history (created_at DESC);
   `);
 
   await pool.query(`
@@ -46,6 +63,11 @@ export async function initializeDatabase() {
   await pool.query(`
     CREATE INDEX IF NOT EXISTS website_inquiries_status_created_idx
       ON website_inquiries (status, created_at DESC);
+  `);
+
+  await pool.query(`
+    CREATE INDEX IF NOT EXISTS website_inquiries_email_created_idx
+      ON website_inquiries (email, created_at DESC);
   `);
 
   await pool.query(`
@@ -78,9 +100,17 @@ export async function initializeDatabase() {
       password_hash TEXT NOT NULL,
       role TEXT NOT NULL DEFAULT 'admin',
       active BOOLEAN NOT NULL DEFAULT TRUE,
+      session_version INTEGER NOT NULL DEFAULT 1,
+      last_login_at TIMESTAMPTZ,
       created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
       updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
     );
+  `);
+
+  await pool.query(`
+    ALTER TABLE website_admins
+      ADD COLUMN IF NOT EXISTS session_version INTEGER NOT NULL DEFAULT 1,
+      ADD COLUMN IF NOT EXISTS last_login_at TIMESTAMPTZ;
   `);
 
   await pool.query(`
@@ -91,5 +121,10 @@ export async function initializeDatabase() {
       details JSONB NOT NULL DEFAULT '{}'::jsonb,
       created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
     );
+  `);
+
+  await pool.query(`
+    CREATE INDEX IF NOT EXISTS website_admin_audit_created_idx
+      ON website_admin_audit (created_at DESC);
   `);
 }
